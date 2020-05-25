@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %}  
+
+
+      <div class="message-row">
+
+
+      </div>
+   <div class="card"> 
+   <div class="card-header bg-light">
+    <p class="text-center text-secondary font-weight-bold"> Attention: Les Consultants Suivants n'ont pas soumis leur Recapulatif Mensuel </p>
+    </div>
+    <div class="card-body">
+        <ul class="list-group bg-light">
+          {% for consultant in consultantsWithEmptyRecaps %}
+              <li class="list-group-item"> {{consultant.firstName}} </li> 
+
+          {% endfor %}
+
+       </ul> 
+   </div>
+ </div>
+    <br>
+
+  
+
+<div class="modal" id="modal-window" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-absolute" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title alert alert-warning text-center rounded-pill text-center mx-auto"> Voulez Vous Quand Meme Continuer En L'etat? </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"> 
+         <div class="row">
+        
+             <div class="col-sm-4 offset-sm-1 mt-2"> <button type="submit" class="btn btn-dark  rounded-pill col" id="yes"> Oui </button> </div>
+            <div class="col-sm-4 offset-sm-1 mt-2"> <button type="submit" class="btn btn-dark  rounded-pill col" id="no"> Non </button> </div>
+         
+        </div>
+      </div>
+      <div class="modal-footer">
+         
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+
+
+
+{% endblock %} 
+
+{% block javascripts %} 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script>
+        
+        $(function(){
+
+            var $modal=$('#modal-window');
+           console.log($modal);
+
+           function showModal(){
+           $modal.modal('show');
+           $modal.css('position','absolute');
+           $modal.css('top','225px')
+           }
+
+           setTimeout(showModal,1000);
+
+
+
+
+            console.log('hello world');
+            var buttonYes=$('#yes');
+            var buttonNo=$('#no');
+            var decisionMessage=$('div.message-row');
+            console.log(decisionMessage);
+
+            buttonYes.click(function(e){
+                e.preventDefault();
+                console.log(e.target.textContent.trim());
+                var value={value:e.target.textContent.trim()};
+                var stringifiedValue=JSON.stringify(value);
+                console.log(stringifiedValue);
+                $.ajax({
+                    type:'POST',
+                    url:'http://127.0.0.1:8001/admin/continueEmptyConsultantChoice/',
+                    data:stringifiedValue,
+                    success: function(msg){
+                        console.log(msg);
+                        decisionMessage.html('');
+                        decisionMessage.html('<div class="alert alert-warning text-center">' +msg+ '</div>')
+                        $modal.modal('hide');
+                    },
+
+                     error: function(xhr, textStatus, error){
+                        console.log(xhr.statusText);
+                        console.log(textStatus);
+                        console.log(error);
+                    }
+                   
+                 })
+            }) 
+
+            buttonNo.click(function(e){ 
+                e.preventDefault();
+                console.log(e.target.textContent.trim());
+                var value={value:e.target.textContent.trim()};
+                var stringifiedValue=JSON.stringify(value);
+                console.log(stringifiedValue);
+
+                $.ajax({
+                    type:'POST',
+                    url:'http://127.0.0.1:8001/admin/continueEmptyConsultantChoice/',
+                    data:stringifiedValue,
+                    success: function(msg){
+                        console.log(msg);
+                        decisionMessage.html('');
+                        decisionMessage.html('<div class="alert alert-warning text-center">' +msg+ '</div>')
+                    },
+
+                     error: function(xhr, textStatus, error){
+                        console.log(xhr.statusText);
+                        console.log(textStatus);
+                        console.log(error);
+                    }
+                   
+                 })
+                
+                
+                
+            })
+        })
+
+    </script>
+
+{% endblock %}

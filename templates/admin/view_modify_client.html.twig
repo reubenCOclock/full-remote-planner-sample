@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %}
+    <h1 class="py-3 text-center"> Ajouter/Reactiver/Désactiver un client</h1>
+    <table class="table table-responisve-sm">
+        <thead>
+          <tr class ="bg-vbl-1">
+                <th> company name </th>
+                <th> Prénom </th>
+                <th> Nom </th>
+                <th> email </th>
+                <th> Portable </th>
+                <th> Activer/Desactiver </th>
+                <th> Modifier </th>
+           </tr>
+
+        </thead> 
+
+        {% for client in clients %} 
+          {% if client.isEmployed == true %}
+            <tbody>
+            <tr class="text-center">
+                <td> {{client.companyName}} </td>
+                <td> {{client.firstname}} </td>
+                <td> {{client.lastname}} </td>
+                <td> {{client.email}} </td>
+                <td> {{client.phoneNumber}} </td>
+                <td> <a class="btn btn-danger bg-vbl rounded-pill" href="{{path('removeClient',{'id':client.id,'slug':app.user.slug})}}"> desactivate </a> </td> 
+                <td> <a class="btn btn-light bg-vbl rounded-pill" href="{{path('modifyClient',{'slug':app.user.slug,'id':client.id})}}"> Editer </a> </td>
+            </tr>
+            </tbody> 
+            {% endif %}
+
+        {% endfor %} 
+
+        
+
+    </table>
+    <h4><a class="btn btn-primary bg-vbl rounded-pill bg-warning col-sm-4 offset-sm-4"  href="{{path('addClient',{'slug':app.user.slug})}}"> Ajouter un client </a> </h4>
+{% endblock %}

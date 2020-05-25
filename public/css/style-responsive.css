@@ -1,0 +1,379 @@
+
+/* VBLADVISORY.COM */
+/* Design & développement : Célina Ngeth */
+/* 2015 */
+
+
+/*********************/
+/* Mobile (portrait) */
+/*********************/
+@media (min-width: 320px) and (max-width: 579px) {
+
+	.menu{
+		display:none;
+	}
+	.menu-media{
+		display:block;
+		overflow: hidden;
+	}
+	.avatar-mini{
+		max-width: 24px;
+		max-height: 24px;
+	}
+	.img-overlay {
+		position: relative;
+		top:4.5em;
+		z-index: 1;
+		
+	}
+
+/* SLIDE */
+	.slide .content{
+		width:300px;
+	}
+	.slide .logo {
+		width:300px;
+	}
+	.slide .logo img {
+		padding-bottom:20px;
+	}
+
+/* VISION */
+	.vision .content{
+		width:300px;
+	}
+	.vision hr, .contact hr {
+		width:106px;
+	}
+	.vision .column-one, .vision .column-two, .vision .column-three{
+		width:300px;
+		margin-bottom:40px;
+	}
+	.vision .content .column-four{
+		width:300px;
+	}
+
+/* TXT */
+	.txt { background:none;}
+
+	.txt .content{
+		width:300px;
+	}
+	.txt .col1{
+		width:300px;
+		margin-bottom:20px;
+	}
+	.txt .content .col2{
+		width:300px;
+	}
+
+/* TEAM */
+	.team { background:none;}
+
+	.team .content{
+		width:300px;
+	}
+	.team .team-margin{
+		width:300px;
+	}
+	.team .content .colonne2{
+		width:300px;
+	}
+
+/* VALEURS */
+	.valeurs .content{
+		width:300px;
+	}
+	.valeurs .columnone{
+		width:300px;
+		margin-bottom:20px;
+	}
+	.valeurs .content .columntwo{
+		width:300px;
+	}
+
+/* PARTNERS */
+	.partners .content{
+		width:100%;
+		height:100%;
+	}
+	.partners .logo {
+		width:100%;
+	}
+	.partners .logo img {
+		width:80px;
+		height: 100%;
+		padding-bottom:10px;
+	}
+	.partners h1 {
+		margin-top:80px;
+	}
+
+/* CONTACT */
+	.contact, .contact .content, .contact .content .form{
+		width:100%;
+	}
+	.contact .content .contact-text{
+		padding-left:0px;
+		width:300px;
+		text-align:center;
+		margin-top:60px;
+	}
+	.contact .content{
+		width:100%;
+	}
+	.contact .column1, .contact .column2{
+		width:100%;
+		margin-bottom:50px;
+	}
+	.contact{ 
+		margin:0 auto;
+	}
+
+	.footer{
+		position:relative;
+	}
+	.avatarcontainer{
+		display: none;
+	}
+}
+
+/*******************/
+/* iPad (portrait) */
+/*******************/
+@media (min-width: 580px) and (max-width: 767px) {
+
+	.menu{
+		display:none;
+	}
+	.menu-media{
+		display:block;
+	}
+	.menu-media .menu-content{
+		width:100%;
+		overflow: hidden;
+	}
+
+/* VISION */
+	.vision .content{
+		width:400px;
+	}
+	.vision hr, .contact hr{
+		width:106px;
+	}
+	.vision .column-one, .vision .column-two, .vision .column-three{
+		width:400px;
+		margin-bottom:40px;
+	}
+	.vision .content .column-four{
+		width:400px;
+		margin-bottom:70px;
+	}
+
+/* TXT */
+	.txt { background:none; }
+
+	.txt .content{
+		width:400px;
+	}
+	.txt .col1{
+		width:400px;
+		margin-bottom:20px;
+	}
+	.txt .col2{
+		width:400px;
+	}
+
+/* SLIDE */
+	.slide .content{
+		width:400px;
+	}
+	.slide .logo {
+		width:400px;
+	}
+	.slide .logo img {
+		padding-bottom:20px;
+	}
+
+/* VALEURS */
+	.valeurs .content{
+		width:400px;
+	}
+	.valeurs .columnone{
+		width:400px;
+		margin-bottom:20px;
+	}
+	.valeurs .content .columntwo{
+		width:400px;
+	}
+
+/* TEAM */
+	.team { background:none; }
+
+	.team .content{
+		width:400px;
+	}
+	.team .team-margin{
+		width:400px;
+	}
+	.team .content .colonne2{
+		width:400px;
+	}
+
+/* CONTACT */
+	.contact, .contact .content, .contact .content .form{
+		width:100%;
+	}
+	.contact .content .contact-text{
+		padding-left:0px;
+		width:400px;
+		text-align:center;
+		margin-top:60px;
+	}
+	.contact .content{
+		width:100%;
+	}
+	.contact .column1, .contact .column2{
+		width:100%;
+		margin-bottom:50px;
+	}
+	.contact{ 
+		margin:0 auto;
+	}
+
+/* PARTNERS */
+	.partners .content{
+		width:400px;
+	}
+	.partners .logo {
+		width:400px;
+	}
+	.partners .logo img {
+		width:80px;
+		height: 100%;
+		padding-bottom:20px;
+	}
+
+	.footer{
+		position:relative;
+	}
+
+}
+
+/*******************/
+/* iPad (portrait) */
+/*******************/
+@media (min-width: 768px) and (max-width: 1023px) {
+
+	.menu{
+		display:none;
+	}
+	.menu-media{
+		display:block;
+	}
+	.menu-media .menu-content{
+		width:100%;
+	}
+
+/* VISION */
+	.vision .content{
+		width:700px;
+	}
+	.vision p{
+		width:100%;
+	}
+	.vision h2{
+		letter-spacing:2px;
+	}
+	.vision .column-one{
+		width:700px;
+		margin-bottom:50px;
+	}
+	.vision .column-two{
+		width:33.33%;
+	}
+	.vision .column-three{
+		width:33.33%;
+	}
+	.vision .column-four{
+		width:33.33%;
+	}
+/* TXT */
+	.txt { background:none; }
+
+	.txt .content{
+		width:700px;
+	}
+	.txt .col1{
+		width:700px;
+		margin-bottom:20px;
+	}
+	.txt .col2{
+		width:700px;
+	}
+/* SLIDE */
+	.slide .content{
+		width:700px;
+	}
+	.slide .logo {
+		width:700px;
+	}
+
+/* valeurs */
+	.valeurs .content{
+		width:700px;
+	}
+
+/* TEAM */
+	.team { background:none; }
+
+	.team .content{
+		width:700px;
+	}
+	.team .team-margin{
+		width:700px;
+	}
+	.team .content .colonne2{
+		width:700px;
+	}
+
+/* PARTNERS */
+	.partners .content{
+		width:700px;
+	}
+	.partners .logo {
+		width:700px;
+	}
+	.partners .logo img {
+		width:100px;
+		height: 100%;
+		padding-bottom:20px;
+	}
+
+/* CONTACT */
+	.contact{ 
+		margin:0 auto;
+	}
+	.contact .content {
+		width:700px
+	}
+	.contact .content .form{
+		width:355px;
+	}
+	.contact .content .contact-text {
+		width:275px;
+	}
+	.contact .content .form .column, .contact .content .form .column-3{
+		width:450px;
+	}
+	.contact .content .form .column-2{
+		width:450px;
+		padding-left:0;
+	}
+
+	.footer{
+		position:relative;
+	}
+
+
+}

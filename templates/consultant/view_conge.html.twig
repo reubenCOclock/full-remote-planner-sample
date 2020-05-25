@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+ 
+{% block body %} 
+
+
+
+
+  <h1 class="py-3 text-center"> Mes demandes de congés</h1>
+   <table class="table table-responsive-sm"> 
+        <thead>
+             <tr class ="bg-vbl-1"> 
+                <th> Type de congé </th>
+                <th> Date de début </th>
+                <th> Date de fin </th> 
+                <th> Absence Journée Ouvré </th>
+                <th> Status </th>
+                <th> Valideur </th>
+                <td> Modifier la demande </th>
+                <th> Supprimer la demande </th>
+
+             </tr>
+        </thead> 
+
+       
+      {% for vacation in vacations  %} 
+
+        
+       <tbody> 
+         <tr class="text-center"> 
+              
+                <td> {{vacation.typeOfVacation}} <br> {% for subVacation in vacation.subVacations.snapshot %} {% if subVacation is not empty %}  {{subVacation.typeOfVacation}} {% endif %} {% endfor %}</td> 
+                <td> {{vacation.startDate.date|date("m/d/Y")}} <br> {% for subVacation in vacation.subVacations.snapshot %} {% if subVacation is not empty %} {{subVacation.startDate.date|date("m/d/Y")}} {% endif %} {% endfor %} </td>
+                <td> {{vacation.endDate.date|date("m/d/Y")}} <br> {% for subVacation in vacation.subVacations.snapshot %} {% if subVacation is not empty %}  {{subVacation.endDate.date|date('m/d/Y')}} {% endif %} {% endfor %} </td> 
+                <td> {{vacation.grantedAbsenceDays}}  <br> {% for subVacation in vacation.subVacations.snapshot %}  {{subVacation.svAbsenceDays}} <br> {% endfor %} </td>
+                {% if vacation.isValidated == false %}
+                    <td> not validated </td>
+                    <td> null </td>
+                {% endif %} 
+
+                {% if vacation.isValidated == true %}
+                    <td> Validated </td> 
+                    <td> {{vacation.rhValidator.firstname}} </td>
+                {% endif %} 
+
+                {% if now < vacation.startDate %}
+                    <td> <a href="{{path('modifyConge',{'id':vacation.id,'slug':app.user.slug})}}" class="link"> Modifier </a> </td> 
+                    {% else %}
+                     <td> Plus Possible de Modifier </td>
+                {% endif %}
+
+                {% if now < vacation.StartDate %}
+                     <td> <a href="{{path('deleteDemandeConge',{'id':vacation.id,'slug':app.user.slug})}}" class="link"> Supprimer </a> </td> 
+                     {% else %} 
+                     <td> Plus Possible de Supprimer </td>
+                {% endif %}
+
+
+            </tr>
+        
+       
+        
+
+       
+
+        </tbody>
+        
+    {% endfor %} 
+       
+    </table> 
+    
+    
+{% endblock %}

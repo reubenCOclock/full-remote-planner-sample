@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <table class="table"> 
+   <h1 class="py-3 text-center"> Details du Projet {{project.title}} </h1>
+    <thead>
+        <tr class="bg-vbl-1 text-center">
+            
+            <th> Nom Du Projet </th>
+            <th> Nom Du Consultant </th>
+            <th> Prix Du Consultant Sur Ce Projet </th>
+        </tr>
+        
+    </thead>
+    {% for details in project.consultantProjectPricesRegies %}
+         <tbody>
+            <tr class="text-center">
+                <td> {{details.project.title}} </td>
+                <td> {{details.consultantFirstName}} </td>
+                <td> {{details.price}} </td>
+            </tr>
+         </tbody>
+    {% endfor %}
+
+    </table>
+
+{% endblock %}

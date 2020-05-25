@@ -1,0 +1,75 @@
+#App\Entity\User: # namespace de l'entité
+#    genre_{1..42}: #le nombre d'iteration d'entité souhaité ici : genre_1, genre_2...genre_23
+#        name: '<word()>' <-- numberBetween(0,5), sentence(),(...)  cf (https://github.com/fzaninotto/Faker#basic-usage)
+
+App\Entity\Role: 
+    role_{1..20}:
+        role_title: '<randomElement(["ROLE_ADMIN","ROLE_CONSULTANT","ROLE_RH","ROLE_CLIENT"])>'
+        description: '<sentence()>'
+
+App\Entity\Project:
+    project_{1..10}:
+        title: '<sentence()>'
+        updated_At: '<dateTimeThisYear("now", "Europe/Paris")>'
+        created_At: '<date_create()>'
+        start_date: '<date_create()>'
+        end_date: '<date_create()>'
+        description: '<text()>'
+        price: '<randomElement(["400","500","600"])>'
+        
+        
+App\Entity\User:
+    user_{1..20}:
+        updated_At: '<dateTimeThisYear("now", "Europe/Paris")>'
+        probation_period: '<date_create()>'
+        beginning_date: '<date_create()>'
+        created_At: '<date_create()>'
+        end_date: '<date_create()>'
+        lastname (unique): '<fr_FR:lastname()>'
+        firstname (unique): '<fr_FR:firstname()>'
+        birthday: '<dateTimeBetween("1990-01-01","1999-12-31")>'
+        ss_id: <fr_FR:nir()>'
+        contractual_status: '<randomElement(["CDD","CDI","Alternant"])>'
+        email (unique): '<fr_FR:email()>'
+        password: '<randomElement(["password","password"])>'
+        is_employed: '<boolean()>'
+        phone_number: '<fr_FR:mobileNumber()>'
+        adress: '<fr_FR:streetAddress()>' 
+        role: '@role*'
+        consultantProjects: '3x @project_*'
+        isHashed: false
+        
+
+App\Entity\MonthlySummary:
+    monthlysummary_{1..50}:
+        title: '<sentence()>'
+        totalDays: '<numberBetween("15","22")>'
+        updated_At: '<date_create()>'
+        created_At: '<date_create()>' 
+        consultant: '@user*'
+
+App\Entity\SickDay:
+    sick-day_{1..5}:
+        updated_At: '<dateTimeThisYear("now", "Europe/Paris")>'
+        created_At: '<date_create()>'
+        start_date: '<date_create()>'
+        end_date: '<date_create()>'
+        description: '<sentence()>'
+        consultant: '@user*'
+
+App\Entity\MyDocument:
+    mydocument_{1..40}:
+        title: '<word()>'
+        url: '<fr_FR:url()>'
+        category: '<randomElement(["Contrat","Mutuelle","Prevoyance"])>'
+        consultant: '@user*'
+
+App\Entity\MySurvey:
+    mysurvey_{1..5}:
+        title: '<sentence()>'
+        updated_At: '<dateTimeThisYear("now", "Europe/Paris")>'
+        created_At: '<date_create()>'
+        start_date: '<date_create()>'
+        end_date: '<date_create()>'
+        is_done: '<boolean()>'
+        owner: '<randomElement(["USER_ADMIN","USER_RH","USER_CLIENT"])>'

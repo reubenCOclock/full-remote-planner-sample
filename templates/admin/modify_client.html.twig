@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+   <div class="container-relative">
+    <h1 class="py-3"> Modification d'un client</h1>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }} 
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    {{ form_end(form) }} 
+  </div>
+
+{% endblock %}

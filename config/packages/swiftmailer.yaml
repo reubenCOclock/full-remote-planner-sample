@@ -1,0 +1,8 @@
+swiftmailer:
+    transport: smtp
+    auth_mode: login
+    port: 587
+    host: ssl0.ovh.net
+    username: reubenchouraki@vbladvisory.com
+    password: ReubenVBL+2019
+    spool: { type: 'memory' }

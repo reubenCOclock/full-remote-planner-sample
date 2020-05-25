@@ -1,0 +1,9 @@
+knp_snappy:
+   pdf:
+       enabled:    true
+       binary:     /home/master/applications/zcpysrmnac/public_html/symfony/wkhtmltox/bin/wkhtmltopdf 
+       options:    []
+
+mailjet:
+    api_key:    "%mailjet.api_key%"
+    secret_key: "%mailjet.secret_key%"

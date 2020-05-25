@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <h1 class="py-3 text-center"> Donner un Avis sur un Consultant </h1>
+    <table class="table table-responsive-sm">
+        <thead>
+        <tr class ="bg-vbl-1">
+            <th> Title </th>
+            <th> Description </th>
+            <th> Manager </th> 
+            <th> Give Consultant Feedback </th>
+        </thead> 
+        {% for clientProject in clientProjects %}
+            <tbody>
+            <tr class="text-center">
+                <td> {{clientProject.title}} </td>
+                <td> {{clientProject.description}}
+                <td> {{clientProject.manager.firstname}} </td>
+                <td> {% for consultant  in clientProject.consultants.snapshot %} 
+                    <ul class="indent-left">
+                        <li> <a href="{{path('giveConsultantFeedback',{'consultantId':consultant.id,'projectId':clientProject.id,'slug':consultant.slug})}}" class="link"> {{consultant.firstname}} </a> </li>
+                    </ul>
+                {% endfor %}   
+                </tr>                
+            </tbody>
+
+        {% endfor %}
+
+    </table>
+{% endblock %} 
+
+
+

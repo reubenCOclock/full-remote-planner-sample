@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+
+    
+<h1 class="py-3 text-center"> Liste des factures</h1> 
+
+
+<table class="table table-responsive-sm">
+  <thead>
+  
+    <tr class="bg-vbl-1">
+      <th> Mois de facturation </th>
+      <th> Anée de facturation </th>
+      <th> Projet </th>
+      <th> Consultant </th>
+      <th> Facture </th>
+   
+    </tr>
+  </thead>
+
+  </thead>
+    {% for index, doc in clientDocs %}
+        <tr class="text-center">
+            <td> {{monthArray[index]}} </td>
+            <td> 20{{yearArray[index]}}
+            
+            <td> {{doc.project.title}} </td> 
+            <td> {{doc.consultant.firstname}} </td>
+            <td> <a href="{{path('viewBill',{'id':doc.id,'slug':app.user.slug})}}" class="link"> Voir La Facture </a> </td>
+        </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}

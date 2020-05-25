@@ -1,0 +1,86 @@
+{% extends 'base.html.1.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %} 
+<div class="container-relative mt-3">
+
+ {% for label, messages in app.flashes %}
+
+                <div class="d-inline">
+                    <div class="text-center alert alert-{{ label }} rounded-pill">
+                        {% for message in messages %}
+                            <p> {{message | raw}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+  {% endfor %}
+
+    {% if error %}
+        <div class="d-block mx-auto text-center alert alert-danger py-2">{{ error.messageKey|trans(error.messageData, 'security') }}</div> 
+    {% endif %} 
+
+     <div class="container position-relative">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card my-5">
+          <div class="card-body">
+                <div class="bg-vbl p-4 rounded-lg">
+                            <h2 class="text-center text-white font-weight-bold">VBL Advisory</h3>
+                </div>
+            <form class="form-horizontal" method="post" action="#">
+
+                                <div class="mt-4 mb-4 row">
+                                    <div class="col-12">
+                                        <label for="emailaddress">Addresse mail :</label>
+                                        <input class="form-control" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Saisir son adresse email" required autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-12">
+                                        <label for="inputPassword">Mot de passe :</label>
+                                        <input class="form-control" name="password" type="password" required="" id="inputPassword" placeholder="Saisir  le mot de passe">
+                                        <input type="hidden" name="_csrf_token"
+                                            value="{{ csrf_token('authenticate') }}">
+                                    </div>
+                                </div>
+
+                                {# <div class="row mb-4">
+                                    <div class="col-12">
+                                        <div class="checkbox checkbox-success">
+                                            <a href="#" class="text-muted float-right">J'ai oublié mon mot de passe</a>
+                                        </div>
+                                    </div>
+                                </div> #} 
+
+                             
+                                <div class="mb-4 text-center bg-vbl font-weight-bold rounded-pill">  
+                                 
+                                    <div class="col-12">
+                                        <button class="btn btn-md btn-block bg-vbl text-white" type="submit">Connexion</button>
+                                    
+                                    </div>
+                                </div> 
+
+                                 
+                              
+                            </form> 
+
+                        
+                            <div class="mb-4 text-center bg-vbl font-weight-bold rounded-pill">
+                                 <div class="col-12">
+                                     <div class="btn btn-md btn-block rounded-pill"> <a class="text-white text-deco-none" href="{{path('forgotPassword')}}"> Mot De Passe Oublié? </a> </div> 
+                                 </div> 
+                              </div>
+                        
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+ 

@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+ <div class="container-relative">
+
+    <h1 class="py-3 text-center"> Modifier Une Demande de Congés</h1>
+    {{ form_start(form)}}
+    {{form_row(form.type_of_vacation)}} 
+    {{form_row(form.start_date)}}
+  
+    {{form_row(form.end_date)}} 
+    <br>
+    <div class="sub-vacation" data-prototype="{{form_widget(form.subVacations.vars.prototype)|e('html_attr')}}">
+          {{form_row(form.subVacations)}}
+    </div>
+    <br>
+     <div class="form-group row button-types col-sm-4 offset-sm-4 d-none d-md-block">
+        <div class="offset-sm-1"> <button type="button" class=" add-subVacation btn btn-dark bg-vbl rounded-pill col-12 pos-rel-ajouter-conge">  Ajouter Une Sous Congé </button> </div> 
+      </div>
+     
+     <div class="form-group row button-types col-12 col-sm-4 offset-sm-4 d-none d-md-block">
+        <div class="offset-sm-1"> <button style="display:none" type="button" class="remove-subVacation col-12 btn btn-dark bg-vbl rounded-pill pos-rel-supprimer-sous-conge col-12"> Supprimer La Sous Congé </button> 
+    </div> 
+    
+     </div> 
+   
+
+    <div class="d-block d-md-none">
+      <button type="button"  class="add-subVacation btn btn-dark bg-vbl col-12 bg-vbl rounded-pill pos-rel-sm-ajouter-conge"> Ajouter Une Sous Congé </button>
+    </div>  
+
+    <br class="d-block d-md-none"/>
+
+    
+
+    <div class="d-block d-md-none">
+      <button type="button" style="display:none"  class="remove-subVacation btn btn-dark bg-vbl col-12 bg-vbl rounded-pill pos-rel-sm-ajouter-conge"> Supprimer La Sous Congé </button>
+    </div>  
+
+
+  <br class="d-block d-md-none"/>
+    
+    
+    <div class="d-none d-md-block"> <button type="submit" class="btn btn-primary bg-vbl  bg-warning col-sm-4 offset-sm-4 pos-rel-conge-submit rounded-pill text-white">Enregister</button>  </div>
+
+    <div class="d-block d-md-none"> <button type="submit" class="btn btn-primary btn-lg btn-warning col-12 col-sm-4 offset-sm-4 text-white rounded-pill">Enregister</button>  </div>
+    {{ form_end(form) }} 
+  </div>
+ 
+
+{% endblock %} 
+
+{% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+
+
+
+    <script>
+       $(function(){
+         var $collectionHolder=$('div.sub-vacation');
+         var $addFormBTN=$('.add-subVacation');
+         var $removeFormBTN=$('.remove-subVacation');
+         var counter=0;
+
+         $removeFormBTN.click(removeSubVacation);
+         console.log($addFormBTN);
+         $addFormBTN.click(function(){
+           addSubVacationForm($collectionHolder);
+         })
+
+         
+         
+         function addSubVacationForm(collectionHolder){
+           counter++;
+           var prototype=collectionHolder.data('prototype');
+           //console.log(prototype);
+           $removeFormBTN.css('display','block');
+           var newForm=prototype;
+           newForm=newForm.replace(/__name__/g,counter);
+           collectionHolder.append(newForm)
+           
+         }
+
+
+           function removeSubVacation(){
+               console.log('project remover is clicked');
+                var $projectsForms=Object.values($('div.sub-vacation').children());
+                console.log($projectsForms);
+                //console.log($projectsForms[1]);
+                if($projectsForms.length-3!=0){
+                console.log($projectsForms.length-3);
+                $projectsForms[$projectsForms.length-3].remove();
+                }
+
+                else{
+                  $projectsForms[0].remove();
+                }
+                
+            } 
+ 
+
+         
+         
+       })
+
+
+    </script>
+        
+{% endblock %}
+

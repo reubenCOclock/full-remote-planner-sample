@@ -1,0 +1,126 @@
+ {% extends 'base.html.twig' %}
+
+{% block body %} 
+   <div class="container-relative">
+    <h1 class="py-3"> Ajout d'un projet</h1>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {{form_row(form.title)}} 
+    {{form_row(form.description)}} 
+
+  
+    {{ form_row(form.client) }} 
+  
+    {{form_row(form.consultants)}} 
+
+
+     {#<div class="project-forfait-livrables" data-prototype="{{ form_widget(form.projectForfaitLivrables.vars.prototype)|e('html_attr') }}">
+        {{form_row(form.projectForfaitLivrables)}}
+   </div>
+   #}
+
+  
+        <h4 class="text-center bg-light mx-auto">  Type de Contrat </h4> 
+        <br>
+        <br>
+     <div class="d-sm-flex justify-content-sm-center flex-sm-row"> 
+      
+       {#<div class="col-sm-3 offset-sm-1"> {{form_row(form.forfait)}} </div>#}
+       
+        <div class="col-sm-4"> {{form_row(form.regie)}} </div>
+        <div class="col-sm-4"> {{form_row(form.intercontrat)}} </div>
+        <div class="col-sm-4"> {{form_row(form.forfait)}}  </div>
+       
+
+     </div>
+
+    
+    {{ form_end(form) }} 
+</div>
+
+{% endblock %} 
+
+
+{% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+
+
+
+    <script>
+
+     
+        $(function(){ 
+
+            var counter=0;
+
+             var $livrablesCollectionHolder=$('div.project-forfait-livrables');
+
+             var $consultantRegiesPricesCollectionHolder=$('div.consultant-prices-regies');
+
+             console.log($consultantRegiesPricesCollectionHolder);
+             console.log($livrablesCollectionHolder);
+
+
+            var $addLivrablesBTN=$('button.add-project-forfait');
+            console.log($addLivrablesBTN);
+
+            $addLivrablesBTN.click(addProjectLivrables);
+
+            $removeLivrablesBTN=$('button.remove-project-forfait');
+
+
+           $removeLivrablesBTN.click(removeProjectForfait);
+
+            
+
+
+           function addProjectLivrables(event){
+
+               event.preventDefault();
+
+               counter++;
+
+               $removeLivrablesBTN.css('display','block');
+
+
+               var $projectLivrablesHolder=$('div.project-forfait-livrables');
+               var projectLivrablesProto=$projectLivrablesHolder.data('prototype');
+               //console.log(projectLivrablesProto);
+
+               var uniquePrototype=projectLivrablesProto.replace(/__name__/g,counter)
+
+            
+
+               $projectLivrablesHolder.append(uniquePrototype);
+               
+    
+           } 
+
+
+           function removeProjectForfait(event){
+
+               event.preventDefault();
+
+               console.log($livrablesCollectionHolder.children());
+               var dataSetLivrables=$livrablesCollectionHolder.children();
+               dataSetLivrables[dataSetLivrables.length-1].remove();
+        
+          
+        } 
+
+
+
+        })
+
+
+    </script>
+        
+{% endblock %}
+
+
+
+
+

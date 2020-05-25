@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %}
+   
+    <h1 class="py-3"> Documents De Arret Maladie Pour {{consultant[0].firstname}} </h1> 
+    <table class="table table-responsive-sm">
+        <thead>
+            <tr class="bg-vbl-1">
+                <th> Date De Creation </th>
+                <th> Categorie </th> 
+                <th> Voir Le Document </th>
+            </tr>
+        </thead> 
+
+        {% for doc in consultantAMDocs %} 
+        <tbody> 
+          <tr class="text-center">
+            <td> {{doc.createdAt|date('Y/m/d')}} </td>
+            <td> {{doc.category}} </td>
+            <td> <a href="{{path('downloadAMDOC',{'id':doc.id,'slug':app.user.slug})}}" class="link"> Details Du Document  </a> </td> 
+        </tr>
+        </tbody>
+
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

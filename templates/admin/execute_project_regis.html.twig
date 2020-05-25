@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="py-3 text-center"> Ajouter le Projet {{project.title}} </h1>
+
+    {{form_start(form)}}
+     <div class="offset-2">
+        {{form_widget(form)}}
+     </div>
+
+     <button type="submit" class="btn btn-primary col-sm-4 offset-sm-4 bg-vbl rounded-pill bg-warning"> Enregistrer</button>
+    {{form_end(form)}}
+
+{% endblock %}

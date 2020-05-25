@@ -1,0 +1,46 @@
+security: 
+    
+    encoders: 
+        App\Entity\User:
+            algorithm: 'auto'
+    
+    providers:
+        full_remote_provider: 
+            entity: 
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true 
+
+            provider: full_remote_provider
+            guard:
+                authenticators:
+                    - App\Security\LoginAuthenticator 
+            
+            logout: 
+                path: app_logout
+                target: app_login
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
+        - {path: '^\/user', roles: [ROLE_CONSULTANT,ROLE_CLIENT]}
+        - {path: '^\/rh', roles: ROLE_RH} 
+        - {path: '^\/admin', roles: ROLE_ADMIN} 
+        - {path: '^\/client', roles: ROLE_CLIENT} 
+    
+    role_hierarchy: 
+        ROLE_RH: ROLE_CONSULTANT
+        ROLE_ADMIN: ROLE_RH 

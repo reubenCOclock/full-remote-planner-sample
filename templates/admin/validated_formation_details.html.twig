@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+
+
+ <h1> Liste des formations validées </h1>
+ <table class="table table-responsive-sm">
+    <thead>
+        <tr class ="bg-vbl-1">
+            <th> Titre </th> 
+            <th> Date de début </th>
+            <th> Date de fin </th>
+            <th> Journéé d'absence ouvré </td>
+            <th> validé par </th>
+            <th> demandé par </th>
+        </tr>
+    </thead> 
+     
+        <tbody> 
+        {% for formation in formations %}
+           <tr class="text-center">
+                <td> {{formation.title}} </td>
+                <td> {{formation.startDate.date|date("m/d/Y")}} </td>
+                <td> {{formation.endDate.date|date("m/d/Y")}} </td>
+
+                <td> {{formation.grantedAbsenceDays}} </td>
+                 {% if formation.rhValidator == null %}
+                <td> null </td>
+            {% else %}
+                <td> {{formation.rhValidator.firstname}} </td>
+            {% endif %}
+                <td> {{formation.consultant.firstname}} <td>
+            </tr>
+        {% endfor %}
+        </tbody>
+   
+
+ </table>
+
+{% endblock %}

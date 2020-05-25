@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+    {{dump(user)}}
+   <div> {{user.firstname}} </div>
+   <div> <img src="{{asset('uploads/avatars/'~user.avatar)}}"> </div>
+{% endblock %}

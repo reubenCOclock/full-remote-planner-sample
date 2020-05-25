@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}  
+    
+    <h1 class="py-3 text-center">Valider une Formation</h1>
+    <table class="table table-responsive-sm">
+        <thead>
+            <tr class ="bg-vbl-1">
+                <th> Titre de la formation </th>
+                <th> Date de début </th>
+                <th> Date de fin </th> 
+                <th> Journée d'absence Ouvré </th>
+                <th> Collaborateur </th> 
+                <th> status </th> 
+                <th> Action </th>
+            </tr>
+        </thead> 
+
+        {% for formation in formations %}
+            <tbody>
+                <tr class="text-center">
+                    <td> {{formation.title}} </td>
+                    <td> {{formation.startDate.date|date("m/d/Y")}} </td>
+                    <td> {{formation.endDate.date|date("m/d/Y")}} </td>
+                    <td> {{formation.grantedAbsenceDays}} </td>
+                    <td> {{formation.consultant.firstname}} </td>
+                    {% if formation.isValidated == true %}
+                        <td>  yes </td>
+                        <td><strong class="text-success">Déjà validé</strong></td>
+                    {% else %}
+
+                         <td> no </td>
+                         <td> <a class="btn btn-light bg-vbl rounded-pill" href="{{path('validerDemandeFormation',{'slug':app.user.slug,'id':formation.id})}}"> Valider </a> </td>
+
+                    {% endif %}
+                         
+                </tr>
+
+            </tbody>
+        {% endfor %}
+
+
+    </table>
+{% endblock %}

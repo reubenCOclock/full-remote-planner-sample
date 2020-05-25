@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+ <h1 class="py-3 text-center"> Voici les formations pour  {{consultant.firstname}} </h1>
+<table class="table table-responsive-sm"> 
+<thead>
+    <tr class="bg-vbl-1 text-center">  
+        <th> Date de debut</th>
+        <th> Date de fin </th>
+        <th> Journée Ouvré D'absence </th>
+        <th> Modifier </th>
+
+    </tr>
+</thead>
+    {% for formation in consultantFormations %}
+       <tbody>
+            <tr class="text-center">
+                    <td> {{formation.startDate|date('Y/m/d')}} </td>
+                    <td> {{formation.endDate|date('Y/m/d')}}  </td>
+                    <td> {{formation.grantedAbsenceDays}} </td>
+                    <td> <a href="{{path('modifyFormation',{'id':formation.id,'slug':app.user.slug})}}" class="link"> Modifier </td> 
+            </tr>
+       </tbody>
+    {% endfor %}
+
+</table>
+{% endblock %}

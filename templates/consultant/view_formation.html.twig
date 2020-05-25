@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %}  
+  <h1 class="py-3 text-center"> Mes demandes de formation</h1>
+  <table class="table table-responsive-sm"> 
+        <thead>
+        <tr class ="bg-vbl-1"> 
+            <th> Titre de la formation </th>
+            <th> Date de début</th>
+            <th> Date de fin </th>
+            <th> Granted Absence Days </th>
+            <th> Status </th>
+            <th> Valideur</th>
+            <th> Modifier La Formation </th>
+            <th> Supprimer La Formation </th>
+        </tr>
+
+    </thead>
+    {% for formation in formations %} 
+
+        <tbody>
+            <tr class="text-center">
+                <td> {{formation.title}} </td>
+                <td> {{formation.startDate.date|date("m/d/Y")}} </td>
+                <td> {{formation.endDate.date|date("m/d/Y")}} </td> 
+                <td> {{formation.grantedAbsenceDays}} </td>
+                {% if formation.isValidated == false %}
+                    <td> not validated </td>
+                    <td> null </td>
+                {% endif %} 
+
+                {% if formation.isValidated == true %}
+                    <td> Validated </td>
+                    <td> {{formation.rhValidator.firstname}} </td>
+                {% endif %} 
+
+                {% if now < formation.startDate %}
+                 <td> <a href="{{path('modifierDemandeFormation',{'id':formation.id,'slug':app.user.slug})}}" class="link"> Modifier </a> </td>
+                 {% else %}
+                 <td> Plus Modifiable </td>
+                {% endif %} 
+
+                {% if now < formation.startDate %} 
+                 <td> <a href="{{path('deleteFormation',{'id':formation.id,'slug':app.user.slug})}}" class="link"> Supprimer </a> </td> 
+
+                 {% else %} 
+                   <td> Plus Modifiable </td>
+                {% endif %}
+
+
+
+
+            </tr>
+
+        </tbody>
+        
+    {% endfor %} 
+
+  </table>
+{% endblock %}

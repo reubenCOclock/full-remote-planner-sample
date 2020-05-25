@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+
+
+ <h1>Liste des arrêts maladie soumis</h1>
+ <table class="table">
+    <thead>
+        <tr class ="bg-vbl-1">
+            <th>Collaborateur</th> 
+            <th>Date de début</th> 
+            <th>Date de fin</th>
+            <th> Granted Absence Days </th>
+            <th>Description</th>
+            <th> Attestation </th>
+            <th>Date de Déclaration</th>
+
+        </tr>
+    </thead> 
+     
+        <tbody> 
+        {% for sday in sdays %}
+           <tr class="text-center">
+                <td> {{sday.consultant.firstname}} </td>
+                <td> {{sday.startDate.date | date("m/d/Y")}} </td>
+                <td> {{sday.endDate.date | date("m/d/Y")}}</td>
+                <td> {{sday.grantedAbsenceDays}} </td>
+                <td> {{sday.description}} </td>
+                 {% if sday.document != null %}
+                 <td> <a href="{{path('downloadAMAttestation',{'id':sday.document.id,'slug':app.user.slug})}}" class="link"> Voir l'attestation </a> </td>  
+                 {% else %} 
+                 <td> N/A </td>
+               {% endif %}
+                <td> {{sday.updatedAt.date | date("m/d/Y")}} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+   
+
+ </table>
+
+{% endblock %}

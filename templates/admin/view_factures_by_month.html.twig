@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   
+    
+    <h1 class="py-3 text-center"> Voici les factures pour le mois de {{actualMonth}} </h1> 
+
+      <a href="{{path('deleteBillsForMonthAndYear',{'slug':app.user.slug})}}" class="btn btn-primary bg-vbl bg-warning rounded-pill col-sm-4 offset-sm-4"> Supprimer Les Factures Pour Ce Mois  </a> 
+     <div class="mt-5"> </div>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th> Mois De Facturation </th>
+                <th> Nom Du Client </th>
+                <th> Nom Du Consultant </th>
+                <th> Nom Du Projet </th>
+                <th> Nombre De Jours Travaillé Par Le Consultant </th> 
+                <th> Type De Contrat </th>
+                <th> Prix Au Jour Du Consultant </th>
+                <th> Document PDF </th>
+
+            </tr> 
+
+            <tbody>
+                {% for facture in factures %} 
+                    {# {{dump(facture.project.projectDays.snapshot)}} #}
+                    <tr>
+                        <td> {{facture.month}} </td>
+                        <td> {{facture.client.firstname}} </td>
+                        <td> {{facture.consultant.firstname}} </td>
+                        <td> {{facture.project.title}} </td> 
+                        {% if facture.days != null %}
+                        <td> {{facture.days}} </th> 
+                        {% else %} 
+                         <td> Null </td> 
+                        {% endif %} 
+                        <td> {% if facture.contractType == 'Regis' %} Regie {% else %} {{facture.contractType}} {% endif %} </td>
+
+                        {% if facture.contractType == 'Regis' %}
+                          <td> {{facture.consultantRate}} </td>
+
+                         {% else %}
+                            <td> N/A </td>
+                        {% endif %}
+
+                    
+                       <td> <a href="{{path('downloadFacture',{'id':facture.id,'slug':app.user.slug})}}" class="link"> Consulter </a> </td>
+                    </tr>
+
+
+                {% endfor %}
+
+            </tbody>
+
+        </thead>
+
+
+    </table>
+
+{% endblock %}

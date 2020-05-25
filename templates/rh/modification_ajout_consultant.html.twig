@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+ <h1 class="py-3 text-center">Ajouter/Modifier  un Consultant</h1>
+    <table class="table table-responisve-sm">
+        <thead>
+        <tr class ="bg-vbl-1">
+            <th> Prénom </th>
+            <th> Nom </th>
+            <th> Email </th>
+            <th> Portable </th> 
+            <th> Contrat </th>
+            <th> employed </th>
+            <th> Activer/desactiver </th>
+
+        </thead> 
+        {% for consultant in consultants %} 
+            <tbody>
+               <tr class="text-center">
+                    <td> {{consultant.firstname}} </td>
+                    <td> {{consultant.lastname}} </td>
+                    <td> {{consultant.email}} </td>
+                    <td> {{consultant.phoneNumber}} </td>
+                    <td> {{consultant.contractualStatus}} </td>
+                    {% if consultant.isEmployed == true %}
+                      <td> yes </td> 
+                      <td> <a class="btn btn-danger bg-vbl rounded-pill" href="{{path('desactivateConsultant',{'id':consultant.id,'slug':app.user.slug})}}">desactiver </a> </td>
+                    {% else %} 
+                       <td> no </td>
+                       <td><a class="btn btn-secondary bg-vbl rounded-pill" href="{{path('reactivateConsultant',{'id':consultant.id,'slug': app.user.slug})}}">activer </a> </td>
+                    {% endif %}
+                </tr>
+            </tbody>
+        {% endfor %}
+
+
+    </table> 
+
+    <h4><a class="btn btn-dark bg-vbl rounded-pill col-sm-4 offset-sm-4" href="{{path('addConsultant',{'slug':app.user.slug})}}"> Ajouter un collaborateur</a> </h4>
+
+{% endblock %}

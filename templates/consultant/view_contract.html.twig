@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title of the PDF</title>
+    </head>
+    <body>
+        
+        {% for user in users %}
+           {% if app.user == user %}
+              <div>  Bonjour {{user.firstname}} Voici une copie vierge de votre contrat de travail </div>
+           {% endif %}
+        {% endfor %} 
+        
+
+    
+    </body>
+</html>

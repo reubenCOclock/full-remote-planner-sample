@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+ 
+    
+    <h1 class="py-3 text-center"> Ajouter/Clôturer un projet</h1>
+    <table class="table">
+        <thead>
+           <tr class ="bg-vbl-1">
+                 <th> Livrable </th>
+                 <th> Date de Facturation </th>
+                 <th> Montant de Facturation </td>
+            </tr>
+        </thead> 
+
+        
+           
+           
+            <tbody> 
+                {% for details in project.projectForfaitLivrables.snapshot %} 
+                 <tr>
+                        <td class="text-center"> {{details.livrable}} </td>
+                        <td class="text-center"> {{details.date|date('Y/m/d')}} </td>
+                        <td class="text-center"> {{details.montant}} </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        
+    </table>
+
+    
+
+{% endblock %}

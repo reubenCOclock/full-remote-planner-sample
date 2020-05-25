@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mofification du profil{% endblock %}
+
+{% block body %}
+    <div class="container position-relative">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        
+        <div class="card mb-3 zindex" >
+        <img class="card-img-top position-absolute" src="{{asset('img/background/slide.jpg')}}" alt="Card image cap">
+        <div class="card-body">
+        <img class="img-overlay img-fluid border border-light mx-auto d-block rounded-pill" style="width: 25%;" src="{{asset('images/avatar/' ~ app.user.imageName)}}" alt="Responsive image"> 
+        </div>
+        </div>
+
+        <div class="card mt-3">
+        <div class="card-body">
+            <h4 class="card-title">{{app.user.firstName}}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">{{app.user.role.roleTitle[5:]|title}}</h6>
+             <ul class="text-black-50 y-3"> 
+                <li>Nom : {{app.user.lastname}}</li>
+                <li>Tél : {{app.user.phonenumber}}</li>
+                <li>Mail : {{app.user.email}}:</li>
+                <li>Projets : </li> 
+                    <ul class="indent-left">
+                        {% for project in app.user.consultantProjects.snapshot %}
+                        {% if project.isActive == true %} 
+                            <li> {{project.title}} </li>
+                        {% endif %}
+                        {% endfor %}
+                </ul>
+         <div class="card-body"> 
+
+                {% if app.user.role.roleTitle == "ROLE_CONSULTANT" %}
+                    <a class="card-link btn btn-warning btn-lg rounded-pill" href="{{ path('account_profile_update_user',{'slug':app.user.slug})}}" role="button">Mettre à jour mon profil</a>
+                {% elseif app.user.role.roletitle == "ROLE_RH" %}
+                    <a class="card-link btn btn-warning btn-lg rounded-pill" href="{{ path('account_profile_update_rh',{'slug':app.user.slug})}}" role="button">Mettre à jour mon profil</a>
+                {% elseif app.user.role.roletitle == "ROLE_CLIENT"%}
+                    <a class="card-link btn btn-warning btn-lg rounded-pill" href="{{ path('account_profile_update_client',{'slug':app.user.slug})}}" role="button">Mettre à jour mon profil</a>
+                {% else %}
+                    <a class="card-link btn btn-warning btn-lg rounded-pill" href="{{ path('account_profile_update_admin',{'slug':app.user.slug})}}" role="button">Mettre à jour mon profil</a>
+                {% endif %}
+
+        </div>
+        </div>
+        </div>
+        
+        </div>      
+    </div>
+</div>
+{% endblock %}

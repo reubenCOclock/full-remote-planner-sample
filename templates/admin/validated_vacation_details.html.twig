@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+
+
+ <h1 class="py-3"> Liste des congés validés </h1>
+ <table class="table table-responsive-sm">
+    <thead>
+       <tr class ="bg-vbl-1">
+            <th> Type de congé </th> 
+            <th> Date de début </th>
+            <th> Date de fin </th>
+            <th> Journée d'absences ouvré </td>
+            <th> validé par </th>
+            <td> demandé par </th>
+        </tr>
+    </thead> 
+    
+    
+        <tbody>  
+        {% for vacation in vacations %}
+            <tr class="text-center">
+                <td> {{vacation.typeOfVacation}} </td>
+                <td> {{vacation.startDate.date| date("m/d/Y")}} </td>
+                <td> {{vacation.endDate.date| date("m/d/Y")}} </td>
+
+                <td> {{vacation.grantedAbsenceDays}} <br> {% for subVacation in vacation.subVacations.snapshot %}   {% if subVacation is not empty %} {{subVacation.svAbsenceDays}} {% endif %} {% endfor %} </td>
+                
+            {% if vacation.rhValidator == null %}
+                <td> null </td>
+            {% else %}
+                <td> {{vacation.rhValidator.firstname}} </td>
+            {% endif %}
+                <td> {{vacation.consultant.firstname}} </td>
+            
+            </tr>
+        </tbody> 
+
+    
+        {% endfor %}
+   
+
+ </table>
+ 
+
+{% endblock %}

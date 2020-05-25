@@ -1,0 +1,193 @@
+{% extends 'base.html.1.twig' %}
+
+{% block body %}
+<div class="preloader" id="preloader">
+		<div class="item">
+		</div>
+</div>
+
+	<div class="container mw-100">
+		<!-- MENU MOBILE -->
+		<section class="menu-media">
+			<div class="menu-content">
+				<a href="#slide"><img src="img/logo-vbl.png"></a>
+			<div class="icon"><a href="#"><img src="img/icons/menu-media.png"/></a></div>
+	</div>
+		</section>
+		<ul class="menu-click">
+			<a href="#vision"><li href="#vision">Notre vision</li></a>
+			<a href="#team"><li href="#team">Notre équipe</li></a>
+			<a href="#partners"><li href="#partners">Nos partenaires</li></a>
+            <a href="#contact"><li href="#contact">Contact</li></a>
+            <a href="{{path('app_login')}}"><li> Connexion</li></a>
+		</ul>
+
+		<!-- MENU -->
+		<section class="menu">
+			<div class="menu-content">
+			<a href="#slide"><img src="img/logo-vbl.png"></a>
+				<ul id="menu justify-content-start">
+					<li><a href="#vision">Notre vision</a></li>
+					<li><a href="#team">Notre équipe</a></li>
+					<li><a href="#partners">Nos partenaires</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{ path('app_login')}}">Connexion</a></li>
+				</ul>
+			</div>
+		</section>
+
+		<!-- SLIDE -->
+		<section class="slide parallax-background mw-100 d-block" id="slide">
+			<div class="opacity"></div>
+			<div class="content">
+				<h4>Conduite du changement, communication, organisation</h4>
+				<h1>Value it, build it, learn from it.</h1>
+				<div class="arrow">
+					<a href="#vision"><img src="img/arrow-down.png"></a>
+				</div>
+			</div>
+		</section>
+
+		<!-- VISION -->
+		<section class="vision" id="vision">
+			<div class="content">
+				<div class="column-one">
+					<h1>Notre <br>vision <br>du conseil</h1>
+					<hr align="left"/>			
+					<h3><br>Pour réussir un projet qui nous est confié, notre recette est simple, basée sur trois ingrédients magiques…</h3>
+				</div>
+
+				<div class="column-two">
+					<img src="img/icons/equipe.png"/>
+					<h2>Une équipe</h2>
+					<p>composée de consultants épanouis, motivés, investis et perspicaces</p>
+				</div>
+				<div class="column-three">
+					<img src="img/icons/post-it.png"/>
+					<h2>Des post-it</h2>
+					<p>parce que l’imagination, et les idées, surtout les plus audacieuses sont souvent des catalyseurs de succès</p>
+				</div>
+				<div class="column-four">
+					<img src="img/icons/cafe.png"/>
+					<h2>Du bon café</h2>
+					<p>pour commencer ou finir nos workshops, et développer le liant entre les parties prenantes du projet</p>
+				</div>
+			</div>	
+		</section>
+		<section class="txt" id="txt">
+			<div class="content">
+				<div class="col1">
+				</div>
+				<div class="col2">
+					<hr><br><br>
+					<p><br>Il en faudrait plus pour vous dévoiler notre vision complète du conseil, mais voici ce dont nous avons besoin pour nous investir dans les projets de nos clients. Au quotidien, toute notre énergie et notre ingéniosité sont au service de la valorisation et la mise en oeuvre de la stratégie client. Nous mutualisons nos expertises et concevons le retour de nos expériences comme un vecteur de succès.<br><br></p>
+
+					<h3>L'esprit VBL apporte une bonne dose d'enthousiasme pour que chaque mission soit une aventure rythmée par la bonne humeur.</h3>
+				</div>
+			</div>
+		</section>
+		<div class="clear"></div>  
+
+
+		<!-- VALEURS -->
+		<section class="valeurs parallax-background-valeurs" id="valeurs">
+			<div class="opacity"></div>
+			<div class="content">
+				<div class="columnone">
+					<h1>Nos <br>valeurs</h1>
+					<hr align="left"/>			
+				</div>
+				<div class="columntwo">
+					<p>Excellence relationnelle<br><br>
+					Engagement & Réussite collective<br><br>
+					Efficacité opérationnelle & créativité</p>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- EQUIPE -->
+			<section class="team" id="team">
+				<div class="content">
+					<div class="team-margin">
+						<h1>Notre équipe</h1>
+						<hr/> 
+						<h3><br>La confiance est le principe déterminant de notre entreprise. </h3>
+						<p><br>Nous l’appliquons à toutes nos collaborations, que ce soit avec nos consultants qu’avec nos partenaires. Le capital humain fait partie intégrante de l’ADN de VBL. Chaque personne intégrant VBL se voit déléguer un réel pouvoir de décision. Nous encourageons un esprit entrepreneurial basé sur une confiance mutuelle et gage de pérennité de la collaboration. <br></p>
+						<p><br>Les consultants VBL sont encouragés grâce à une politique salariale incitative, au plus près de leur performance et de leur investissement notamment via la promotion interne, la formation et la redistribution des profits.</p>
+						<h3>Notre ambition est de paraître dans le palmarès des entreprises où il fait bon travailler et vivre « Great Place To Work ». </h3>
+					</div>   
+					<div class="colonne2"></div>
+				</div>
+			</section>
+
+
+			<!-- CONTACT -->
+			<section class="contact" id="contact">
+				<div class="content">
+					<div class="column1">
+						<h1>Vous êtes un client</h1>
+						<hr>
+						<p>Nous serons ravis de vous rencontrer pour vous proposer nos services.<br><br></p>
+						<h2><a href="mailto:contact@vbladvisory.com">contact@vbladvisory.com</a></h2>
+						<h2>Dounia LAZRAK | 06 31 89 64 10</h2>
+					</div>
+					<div class="column2">
+						<h1>Vous êtes un consultant</h1>
+						<hr>
+						<p>Si l’aventure vous tente, envoyez-nous vos motivations et vos compétences et nous en discuterons autour d’un entretien.<br><br></p>
+						<h2><a href="carrieres@vbladvisory.com">carrieres@vbladvisory.com</a></h2>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- PARTENAIRES -->
+			<section class="partners parallax-background-partners" id="partners">
+				<div class="opacity"></div>
+				<div class="content">
+					<h1>Ils nous ont fait confiance</h1><hr>
+					<div class="logo">
+						<a href="#"><img src="img/logos/airfrance.png"></a>
+						<a href="#"><img src="img/logos/bnpp.png"></a>
+						<a href="#"><img src="img/logos/bpce.png"></a>
+						<a href="#"><img src="img/logos/banquepostale.png"></a>
+						<a href="#"><img src="img/logos/edmond.png"></a>
+						<a href="#"><img src="img/logos/clubmed.png"></a>
+						<a href="#"><img src="img/logos/francelocale.png"></a>
+						<a href="#"><img src="img/logos/natixisam.png"></a>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- FOOTER -->
+			
+			<footer class="footer">
+				<div class="copyright">©2019  —  VBL Advisory. Tous droits réservés.</div>        
+			</footer>  
+			
+			
+			
+
+        </div>
+
+{% endblock %}
+
+{% block javascripts %}
+        <script src="https:/VBL Advisory _ Conseil en management/code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https:/VBL Advisory _ Conseil en management/cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https:/VBL Advisory _ Conseil en management/stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+		<!-- SCRIPTS -->
+		<script src="{{ asset('js/jquery-1.11.0.min.js')}}" type="text/javascript"></script>
+		<script src="{{ asset('js/jquery-ui-1.10.4.min.js')}}" type="text/javascript"></script> <!-- jQuery -->
+		<script src="{{ asset('js/jquery.nicescroll.js')}}"></script> <!-- jQuery NiceScroll -->
+		<script src="{{ asset('js/jquery.sticky.js')}}"></script> <!-- jQuery Stick Menu -->
+		<script src="{{ asset('js/masonry.pkgd.min.js')}}"></script> <!-- All script -->
+		<script src="{{ asset('js/imagesloaded.pkgd.min.js')}}"></script> <!-- All script -->	
+		<script src="{{ asset('js/jquery.pace.js')}}"></script> <!-- All script -->
+		<script src="{{ asset('js/jquery.parallax.js')}}"></script> <!-- jQuery Parallax -->	
+		<script src="{{ asset('js/script.js')}}"></script> <!-- All script -->
+
+{% endblock %}

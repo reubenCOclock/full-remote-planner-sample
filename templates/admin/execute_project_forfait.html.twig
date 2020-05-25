@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <h1 class="py-3 text-center"> Ajouter le Projet {{project.title}} </h1>
+  
+    {{form_start(form)}}
+
+  <div class="offset-3">  
+     <div class="project-forfait-livrables" data-prototype="{{ form_widget(form.projectForfaitLivrables.vars.prototype)|e('html_attr') }}"> 
+   
+        {{form_row(form.projectForfaitLivrables)}}
+   
+     </div>
+  </div>
+
+
+
+    <div class="row">
+  
+        <button type="button" class="btn btn-dark bg-vbl rounded-pill add-project-livrable col-sm-4 offset-sm-1"> Ajouter Un Livrable Pour Ce Projet </button>
+        <button type="button" class="btn btn-dark bg-vbl rounded-pill remove-project-livrable col-sm-4 offset-sm-2"> Supprimer Le Dernier Forfait </button>
+    </div>
+
+    <br>
+    <div class="row mt-5">
+
+        <button type="submit" class="btn btn-primary bg-warning rounded-pill bg-vbl col-sm-4 offset-sm-4"> Soumettre Ce Projet </button>
+
+    </div>
+
+
+    {{form_end(form)}}
+
+{% endblock %}
+
+
+
+
+{% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+
+
+
+    <script>
+
+     
+        $(function(){ 
+
+            var counter=0;
+
+             var $livrablesCollectionHolder=$('div.project-forfait-livrables');
+
+             console.log($livrablesCollectionHolder);
+
+
+            var $addLivrablesBTN=$('button.add-project-livrable');
+            console.log($addLivrablesBTN);
+
+            $addLivrablesBTN.click(addProjectLivrables);
+
+            $removeLivrablesBTN=$('button.remove-project-livrable');
+
+
+           $removeLivrablesBTN.click(removeProjectForfait);
+
+            
+
+
+           function addProjectLivrables(event){
+
+               event.preventDefault();
+
+               console.log('add project button clicked');
+
+               counter++;
+
+               $removeLivrablesBTN.css('display','block');
+
+
+               var $projectLivrablesHolder=$('div.project-forfait-livrables');
+               var projectLivrablesProto=$projectLivrablesHolder.data('prototype');
+               //console.log(projectLivrablesProto);
+
+               var uniquePrototype=projectLivrablesProto.replace(/__name__/g,counter)
+
+            
+
+               $projectLivrablesHolder.append(uniquePrototype);
+               
+    
+           } 
+
+
+           function removeProjectForfait(event){
+
+               event.preventDefault();
+
+               console.log($livrablesCollectionHolder.children());
+               var dataSetLivrables=$livrablesCollectionHolder.children();
+               dataSetLivrables[dataSetLivrables.length-1].remove();
+        
+          
+        } 
+
+
+
+        })
+
+
+    </script>
+        
+{% endblock %}

@@ -1,0 +1,389 @@
+{% extends 'base.html.twig' %} 
+{% block body %} 
+  <div class="container-fluid">
+    <div class="col">
+      <h4 class="display-3 text-center d-none d-md-block">Bonjour {{app.user.firstname}}!</h4> 
+      <h6 class="font-weight-bold d-block d-md-none text-center"> Bonjour {{app.user.firstname}} </h6>
+          <p class="lead text-center">Bienvenue sur ton profil. C'est espace t'est dédié et il te servira à mieux échanger et à fluidifier tes échanges avec ton cabinet. </p>
+  
+     </div>   
+      <div class="row">
+        <div id="carouselVBL" class="carousel d-none d-md-block" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselVBL" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselVBL" data-slide-to="1"></li>
+              <li data-target="#carouselVBL" data-slide-to="2"></li>
+            </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="cover-user d-block" src="{{asset('img/background/value.jpg')}}" alt="Responsive image First slide">
+              <div class="carousel-caption d-none d-md-block">
+                <img src="{{ asset('img/logo-vbl.png')}}">
+                <p>Value it</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img class="cover-user d-block" src="{{asset('img/background/build.jpg')}}" alt="Responsive image Second slide">
+              <div class="carousel-caption d-none d-md-block">
+                <img src="{{ asset('img/logo-vbl.png')}}">
+                <p class="text-muted">Build it</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img class="cover-user d-block" src="{{asset('img/background/learn.jpg')}}" alt="Responsive image Third slide">
+              <div class="carousel-caption d-none d-md-block">
+                <img src="{{ asset('img/logo-vbl.png')}}">
+                <p class="text-muted">Learn from it</p>
+              </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselVBL" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselVBL" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
+  </div>
+
+{% if app.user.role.roleTitle == "ROLE_CONSULTANT" %} 
+ 
+   <div class="row">
+    <div class="col-md-4">
+    
+      <div class="card bg- white mt-3"> 
+       <div class="card-header">
+        <h2 class="fa-vbl">My Documents</h2>
+       </div>
+       
+        <div class="card-header text-center">
+          <i class="fa fa-book fa-vbl fa-3x my-3" aria-hidden="true"></i>
+          
+          
+          <div class="card-body overflow-auto">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-light"> <a href="{{path('viewContratsAvenants',{'slug':app.user.slug})}}" class="link "> Contrat et  Avenants </a> </li>
+            <li class="list-group-item bg-light"> <a href="{{path('viewProInterviews',{'slug':app.user.slug})}}" class="link">  Entretiens Pro </a> </li>
+            <li class="list-group-item bg-light"> <a href="{{path('viewEvaluations',{'slug':app.user.slug})}}" class="link">  Entretiens d'evaluation </a> </li>
+            <li class="list-group-item bg-light"> <a href="{{path('suiviMissions',{'slug':app.user.slug})}}" class="link"> Suivi De Missions </a> </li> 
+            
+
+           {# <li>Mutuelle<a href="#" class=""></a></li>
+            <li>Prévoyance<a href="#" class=""></a></li>
+            <li>Mes bulletins de paie<a href="#" class=""></a></li> #}
+          </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-white mt-3"> 
+      <div class="card-header">
+        <h2 class="fa-vbl">My Actions</h2>
+      </div>
+        <div class="card-header text-center">
+          <i class="fa fa-user fa-vbl fa-3x my-3" aria-hidden="true"></i>
+          
+          
+          <div class="card-body overflow-auto"> 
+           <div class="card">
+            <h4 class="card-header text-left ml-25">
+                Releve D'Acitivité
+            </h4>
+            
+            <ul class="list-group list-group-flush">
+             <div class="list-group-item text-left bg-light d-sm-flex flex-sm-row justify-content-sm-between">
+              <li class="align-self-start"> Jours Travaillés </li>
+               <div>
+                  <a href="{{path('monthlySummary',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col-sm-2 mt-1 mb-1 d-none d-md-inline ml-1"> <i class="fas fa-pen"></i> </a>
+                   <a href="{{path('viewMonthlySumms',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col-sm-2 mt-1 mb-1 d-none d-md-inline ml-1"> <i class="far fa-eye"></i>  </a>
+
+                    <a href="{{path('monthlySummary',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning  col mt-1 mb-1 d-block d-md-none"> <i class="fas fa-pen"></i> </a>
+                   <a href="{{path('viewMonthlySumms',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col mt-1 mb-1 d-block d-md-none"> <i class="far fa-eye"></i>  </a>
+                </div>
+              
+               </div>  
+            </ul>  
+
+          </div>
+              
+          <br> 
+
+           <div class="card">
+              <h4 class="card-header text-left ml-25">
+                  Absences
+              </h4>
+
+           <ul class="list-group list-group-flush">
+              
+              {# <li class="action"> <a href="{{path('viewMonthlySumms',{'slug':app.user.slug})}}" class="link"> Historique de Mes Releves </a> </li> #} 
+             <div class="list-group-item text-left bg-light d-sm-flex flex-sm-row justify-content-sm-between">
+              <li class="align-self-start"> Congés </li>
+               <div class="align-self-sm-end">
+                 <a href="{{path('demandeConge',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col-sm-2 mt-1 mb-1 d-none d-md-inline ml-1"> <i class="fas fa-pen"></i>  </a> 
+                 <a href="{{path('viewConges',{'slug':app.user.slug,'id':app.user.id})}}" class="btn btn-sm btn-outline-warning col-sm-3 mt-1 mb-1 d-none d-md-inline ml-1"> <i class="far fa-eye"></i>  </a> 
+
+                 <a href="{{path('demandeConge',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col mt-1 mb-1 d-block d-md-none"> <i class="fas fa-pen"></i>  </a> 
+                 <a href="{{path('viewConges',{'slug':app.user.slug,'id':app.user.id})}}" class="btn btn-sm btn-outline-warning col mt-1 mb-1 d-block d-md-none"> <i class="far fa-eye"></i>  </a> 
+
+                 
+                </div>
+              
+            </div>
+              {# <li class="action"> <a class="link" href="{{path('viewConges',{'slug':app.user.slug,'id': app.user.id})}}"> Historique de mes demandes de congés </a> </li> #}
+              <div class="list-group-item text-left bg-light d-sm-flex flex-sm-row justify-content-sm-between">
+              <li class="align-self-start"> Formation </li>
+              <div class="align-self-end">
+                <a href="{{path('demandeFormation',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col-sm-2 mt-1 mb-1 d-none d-md-inline ml-1"> <i class="fas fa-pen"></i>  </a>
+                <a href="{{path('viewDemandeFormation',{'id':app.user.id,'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col-sm-2 mt-1 mb-1 d-none d-md-inline ml-1"> <i class="far fa-eye"></i>   </a> 
+
+                <a href="{{path('demandeFormation',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col mt-1 mb-1 d-block d-md-none"> <i class="fas fa-pen"></i>  </a>
+                <a href="{{path('viewDemandeFormation',{'id':app.user.id,'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col mt-1 mb-1 d-block d-md-none"> <i class="far fa-eye"></i>   </a>  
+              </div>
+             </div>
+
+             {# <li class="action"> <a class="link" href="{{path('viewDemandeFormation',{'id':app.user.id,'slug':app.user.slug})}}"> Historique de mes demandes de formations </a> </li> #}
+             <div class="list-group-item text-left bg-light d-sm-flex flex-sm-row justify-content-sm-between">
+              <li class="align-self-start"> Arret Maladie </li> 
+               <div class="align-self-end"> 
+                <a href="{{path('sickDay',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col-sm-2 mt-1 mb-1 d-none d-md-inline ml-1"> <i class="fas fa-pen"></i>  </a> 
+                <a href="{{path('viewArretsMaladies',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col-sm-2 mt-1 mb-1 d-none d-md-inline ml-1"> <i class="far fa-eye"></i> </a>
+                
+                <a href="{{path('sickDay',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col mt-1 mb-1 d-block d-md-none ml-1"> <i class="fas fa-pen"></i>  </a> 
+                <a href="{{path('viewArretsMaladies',{'slug':app.user.slug})}}" class="btn btn-sm btn-outline-warning col mt-1 mb-1 d-block d-md-none ml-1"> <i class="far fa-eye"></i> </a>
+               </div>
+              </div>
+              {# <li class="action"> <a href="{{path('viewArretsMaladies',{'slug':app.user.slug})}}" class="link"> Historique de mes arrets maladies </a> </li> #}
+              
+            
+             </ul>
+          </div>
+        
+          
+            
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-4">
+      <div class="card bg-white mt-3">
+      <div class="card-header">
+         <h2 class="fa-vbl">My Links</h2>
+       </div>
+        <div class="card-header text-center">
+          <i class="fa fa-users fa-vbl fa-3x my-3" aria-hidden="true"></i>
+          
+          
+          <div class="card-body overflow-auto">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-light"> <a href="#" class="link"> Link1</a></li>
+            <li class="list-group-item bg-light"><a href="#" class="link">Link2</a></li>
+          </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  
+{% elseif app.user.role.roletitle == "ROLE_RH" %}
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card bg- white mt-3"> 
+     <div class="card-header">
+       <h2 class="fa-vbl">My documents</h2>
+      </div>
+        <div class="card-header text-center">
+          <i class="fa fa-book fa-vbl fa-3x my-3" aria-hidden="true"></i>
+          
+          
+          <div class="card-body overflow-auto">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-light">Processus de recrutement<a href="#" class=""></a></li>
+            <li class="list-group-item bg-light">Consulter les récapitulatifs mensuels<a href="#" class=""></a></li>
+            <li class="list-group-item bg-light">Consulter les arrêts maladies<a href="#" class=""></a></li>
+          </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-4">
+      <div class="card bg-white mt-3">
+      <div class="card-header">
+       <h2 class="fa-vbl">My actions</h2>
+      </div>
+        <div class="card-header text-center">
+          <i class="fa fa-user fa-vbl fa-3x my-3" aria-hidden="true"></i>
+         
+          
+          <div class="card-body">
+            
+            <div class="overflow-auto">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-light"><a href="{{path('voirDemandeConge',{'slug':app.user.slug})}}" class="link"> Valider une demandes de congé</a></li>
+              <li class="list-group-item bg-light"> <a href="{{path('filterDemandeConge',{'slug':app.user.slug})}}" class="link"> Synthese de demande congé par anée et Consultant </a> </li>
+              <li class="list-group-item bg-light"><a class="link" href="{{path('voirDemandeFormation',{'slug':app.user.slug})}}">Valider une demande de formation</a></li>
+              <li class="list-group-item bg-light"><a class="link" href="{{path('voirConsultants',{'slug':app.user.slug})}}" class="link"> Ajouter ou désactiver un collaborateur</a></li>
+
+      
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-4">
+      <div class="card bg-white mt-3">
+      <div class="card-header">
+       <h2 class="fa-vbl">Surveys</h2>
+      </div>
+        <div class="card-header text-center">
+          <i class="fa fa-users fa-vbl fa-3x my-3" aria-hidden="true"></i>
+         
+          
+          <div class="card-body overflow-auto">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-light">Faire un sondage <a href="#" class=""></a></li>
+            <li class="list-group-item bg-light">Consulter les résultats<a href="#" class=""></a></li>
+          </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  
+{% elseif app.user.role.roletitle == "ROLE_CLIENT"%} 
+    
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card bg- white mt-3">
+      <div class="card-header">
+            <h2 class="fa-vbl">My documents</h2>
+        </div>
+        <div class="card-header text-center">
+        
+          <i class="fa fa-book fa-vbl fa-3x my-3" aria-hidden="true"></i>
+          
+          
+          <div class="card-body overflow-auto">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-light">Contrat<a href="#" class=""></a></li>
+            <li class="list-group-item bg-light"> <a class="link" href="{{path('viewBills',{'id':app.user.id,'slug':app.user.slug })}}"> Factures </a> </li>
+            <li class="list-group-item bg-light">Livrables 2<a href="#" class=""></a></li>
+            <li class="list-group-item bg-light">Livrables 3<a href="#" class=""></a></li>
+          </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-6">
+      <div class="card bg-white mt-3">
+      <div class="card-header">
+         <h2 class="fa-vbl">My actions</h2>
+      </div>
+        <div class="card-header text-center">
+          <i class="fa fa-user fa-vbl fa-3x my-3" aria-hidden="true"></i>
+          
+          
+          <div class="card-body">
+            
+            <div class="overflow-auto">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-light"> <a href="{{path('seeProjectsAndConsultants',{'slug':app.user.slug})}}" class="link"> Donner un avis sur un consultant</a></li>
+              <li class="list-group-item bg-light">Renseigner un besoin<a href="#" class=""></a></li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+{% else %}
+    
+  <div class="row">
+    <div class="col-md-4"> 
+    
+    
+      <div class="card bg- white mt-3"> 
+      <div class="card-header">
+        <h2 class="fa-vbl">My Consultations</h2>
+      </div> 
+        <div class="card-header text-center">
+          <i class="fa fa-book fa-vbl fa-3x my-3" aria-hidden="true"></i>
+          
+
+          <div class="card-body overflow-auto">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item bg-light"> <a class="link" href="{{path('seeInitialDocuments',{slug:app.user.slug})}}"> Documents Initials Par Consultant  </a>  </li>
+            <li class="list-group-item bg-light"><a class="link" href="{{path('setMoisConsultationFactures',{slug:app.user.slug})}}"> Voir Les Factures Par Mois </a> </li>
+            <li class="list-group-item bg-light"><a class="link" href="{{path('viewMonthlSummaries',{'slug':app.user.slug})}}"> Synthèse des récapitulatifs mensuels</a> </li>
+            <li class="list-group-item bg-light"> <a class="link" href="{{path('viewSickDays',{'slug':app.user.slug})}}"> Synthèse des arrêts maladies </a> </li> 
+            <li class="list-group-item bg-light"> <a class="link" href="{{path('viewValidatedVacations',{'slug':app.user.slug})}}"> Synthèse des demandes de congés</a> </li>
+            <li class="list-group-item bg-light"><a class="link" href="{{path('viewValidatedFormations',{'slug':app.user.slug})}}"> Synthèse des demandes de formation </a> </li>
+             {#<li class="list-group-item bg-light"> <a class="link" href="{{path('viewClientFeedback',{'slug':app.user.slug})}}"> <li> Synthèse des feedbacks clients </li> </a> #} 
+           
+            
+          </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-4">
+      <div class="card bg-white mt-3"> 
+      <div class="card-header">
+          <h2 class="fa-vbl"> My Actions </h2>
+      </div>
+        <div class="card-header text-center"> 
+           
+          <i class="fa fa-user fa-vbl fa-3x my-3" aria-hidden="true"></i>
+          
+          
+          <div class="card-body">
+            
+            <div class="overflow-auto">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-light"><a href="{{path('facturationClient',{slug:app.user.slug})}}" class="link"> Générer la facturation</a></li> 
+              <li class="list-group-item bg-light"> <a href="{{path('uploadPDFFile',{'slug':app.user.slug})}}" class="link"> Telecharger Un Document Pour Un Consultant </a> </li>
+              <li class="list-group-item bg-light"> <a href="{{path('consultProjects',{'slug':app.user.slug})}}" class="link"> Consulter/Clôturer/Ajouter Projet</a></li>
+              <li class="list-group-item bg-light"> <a href="{{path('viewCollaborateurs',{slug:app.user.slug})}}" class="link"> Consulter/Ajouter/Sésactiver Collaborateur</a></li> 
+              <li class="list-group-item bg-light"> <a href="{{path('consultationClient',{'slug':app.user.slug})}}" class="link">  Consulter/Ajouter/Supression Clients </a> </li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-4">
+      <div class="card bg-white mt-3">
+       <div class="card-header">
+          <h2 class="fa-vbl">Client Info</h2>
+       </div>
+        <div class="card-header text-center">
+          <i class="fa fa-users fa-vbl fa-3x my-3" aria-hidden="true"></i>
+          
+          
+          <div class="card-body overflow-auto">
+          <ul class="list-group list-group-flush">
+             <li class="list-group-item bg-light"> <a class="link" href="{{path('viewClientFeedback',{'slug':app.user.slug})}}"> Voir Les Retours des Clients </a>  </li> 
+
+            {#<li>Consulter les résultats<a href="#" class=""></a></li> #}
+          </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+
+{% endif %} 
+
+</div>
+
+{% endblock %}

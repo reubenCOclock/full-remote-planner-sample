@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="py-3 text-center"> Mois De Consultation: {{actualMonth}} </h1>
+    
+
+    <table class="table table-responsive-sm">
+        <thead>
+            <tr class="bg-vbl-1 text-center"> 
+                <th> Anée de declaration </th>
+                <th> Projet/s </th>
+                <th> Jours travaillé sur ce projet </th> 
+                <th> Taux Au Jour </th>
+            </tr>
+        </thead> 
+
+        {% for monthlySumm in userMonthlySummaries %}
+            <tbody> 
+            <tr class="text-center">
+                <td> 20{{monthlySumm.year}} </td>
+                <td> {% for project in monthlySumm.projectDays.snapshot %} {{project.project.title}} <br> {% endfor %} </td>
+                <td> {% for project in monthlySumm.projectDays.snapshot %} {{project.days}} <br> {% endfor %} </td>
+                 <td> {% for project in monthlySumm.projectDays.snapshot %} {% for projectRate in  project.project.consultantProjectPricesRegies.snapshot %} {% if projectRate.consultantFirstName == app.user.firstname %} {{projectRate.price}} <br> {% endif %}  {% endfor %} {% endfor %}   </td> 
+            </tr>  
+            </tbody>
+        {% endfor %}
+
+    </table>
+
+
+{% endblock %}

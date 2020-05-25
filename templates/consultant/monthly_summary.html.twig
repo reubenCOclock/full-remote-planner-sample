@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Récapitulatif mensuel {% endblock %} 
+
+
+
+{% block body %} 
+
+<div class="container-relative"> 
+   
+    <div class="d-inline">
+            
+    </div> 
+
+    {% if app.session.get('equalDays') == false %} 
+      <h4 class="alert alert-danger"> Vos jours de travail declaré ne corresponde pas a vos absences pendent ce mois, voulez vous quand meme contineur </h4>
+        
+            <button type="btn" name="oui" class="oui"> Oui </button> 
+            <button type="btn" name="non" class="non"> Non </button>
+
+        
+
+    {% endif %}
+    
+    <h1 class="py-3 text-center"> Déclarer son récapitulatif mensuel</h1> 
+    <h4 class="py-3 text-center dark-yellow mx-auto"> Mois de déclaration: {{workingDaysMonth.actualMonth}} </h4> 
+    <h4 class="py-3 text-center dark-yellow mx-auto"> Nombre de Jour Ouvré dans ce mois: {{workingDaysMonth.workingDays}} </h4>
+    <h4 class="py-3 text-center dark-yellow"> Absences declarées: {{grantedAbsenceDays}} </h4> 
+
+    {{ form_start(form) }} 
+    
+      {{form_row(form.month)}}
+    <div class="project-days" data-prototype="{{ form_widget(form.projectDays.vars.prototype)|e('html_attr') }}"> 
+        {{form_row(form.projectDays)}}
+    </div>
+
+    <div class="form-group row button-types  d-none d-md-block">
+        <div class="offset-sm-1"> <button type="button"  class="add-project btn btn-dark bg-vbl rounded-pill btn-margin col-sm-3 offset-sm-4">  Ajouter Un Projet </button> </div> 
+        
+     </div> 
+
+     <div class="form-group row button-types offset-sm-4 d-block d-md-none">
+        <button type="button" id="add-project" class="add-project col btn btn-dark bg-vbl rounded-pill btn-margin col-sm-12">  Ajouter Un Projet </button>  
+     </div>
+
+     <div class="form-group row button-types d-none d-md-block">
+
+        <div class="offset-sm-2"> <button style="display:none" type="button"  class="remove-project btn btn-dark bg-vbl rounded-pill  btn-margin col-sm-4 offset-sm-3 pos-rel-recap-supprimer"> Supprimer le dernier Projet </button>  </div>
+
+     </div> 
+
+     <div class="form-group row button-types d-block d-md-none"> 
+         <button type="button" style="display:none"  class="remove-project col btn btn-dark bg-vbl rounded-pill btn-margin col-sm-12">  Supprimer le Dernier Projet </button>  
+
+     </div>
+
+    <div class="d-none d-md-block"> <button type="submit" class="btn btn-primary bg-warning bg-vbl rounded-pill text-white offset-sm-4 col-sm-4">Enregistrer</button> </div> 
+     <div class=" d-block d-md-none"> <button type="submit" class="col btn btn-primary bg-warning bg-vbl rounded-pill text-white">Enregistrer</button> </div>
+
+    {{ form_end(form) }} 
+
+    
+   
+
+    
+</div>
+{% endblock %} 
+
+{% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+
+
+
+    <script>
+
+     
+        $(function(){
+            var $addProjectBTN=$('.add-project');
+            var $removeProjectBTN=$('.remove-project');
+            var $collectionHolder=$('div.project-days');
+            var $buttonCollection=$('div.remove-btn');
+
+            var counter=0;
+            $addProjectBTN.click(function(){
+                addProjectDaysForm($collectionHolder)
+            })
+
+            $removeProjectBTN.click(removeProjectDays);
+
+            //console.log('counter at' +counter);
+
+            function addProjectDaysForm($valueHolder){ 
+                counter ++;
+                $('.remove-project').css('display','block');
+
+                
+                var $projectDaysForm=$valueHolder.data('prototype');
+                var $newForm=($projectDaysForm.replace(/__name__/g,counter));
+                $valueHolder.append($newForm);
+                $newFormObject=$($newForm);
+                $newFormObject.data('counter',counter);
+                console.log($newFormObject.data('counter'));
+                //console.log(Object.values($('div.project-days').children()));
+            } 
+
+            
+            
+
+            function removeProjectDays(){ 
+                
+                var $projectsForms=$('div.project-days').children();
+                console.log($projectsForms);
+                //console.log($projectsForms[1]);
+               $projectsForms[$projectsForms.length-1].remove();
+                
+            } 
+
+
+            
+ 
+          
+        })
+
+
+    </script>
+        
+{% endblock %}
+
+
+
+
+
+
+
+
+

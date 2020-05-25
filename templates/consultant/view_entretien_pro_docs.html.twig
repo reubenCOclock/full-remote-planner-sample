@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+
+    
+    <h1 class="py-3 text-center"> Voir Tout Mes Avenants </h1>
+    <table class="table table-responsive-sm"> 
+    <thead>
+        <tr class="bg-vbl-1"> 
+            <th> Titre </th>
+            <th> Date de Creation </th> 
+            <th> Categorie </th>
+            <th> Voir Les Details </th>
+        </tr>
+    </thead>
+    {% for document in entretienProDocuments %}
+        <tr class="text-center">
+            <td> {{document.title}} </td>
+            <td> {{document.createdAt|date('Y/m/d')}} </td>
+            <td> {{document.category}} </td> 
+            <td> <a class="link" href="{{path('viewDocument',{'id':document.id,'slug':app.user.slug})}}"> Voir Le Document </a> </td>
+        </tr>
+
+    {% endfor %}
+
+    </table>
+
+{% endblock %}

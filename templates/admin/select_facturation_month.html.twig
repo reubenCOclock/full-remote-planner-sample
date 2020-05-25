@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+   <div class="container-relative">
+    <h1 class="py-3 text-center"> Voir Les Factures Par Mois </h1>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }} 
+    <button type="submit" class="btn btn-primary bg-vbl bg-warning col-sm-4 offset-sm-4 rounded-pill"> Enregistrer </button>
+    {{ form_end(form) }} 
+  </div>
+
+{% endblock %}

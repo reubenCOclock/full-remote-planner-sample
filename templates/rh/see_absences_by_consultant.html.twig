@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+ 
+
+     <h2 class="py-3 text-center"> Consultant: {{consultant.firstname}} </h2>
+    <h1 class="py-3">  Demandes De Congés </h1> 
+
+    <table class="table table-responsive-sm"> 
+      <thead>
+       <tr class="bg-vbl-1">
+         <th> Date de Debut </th> 
+         <th> Date De Fin </th> 
+         <th> Type de Vacances </th>
+         <th> Jours d'absence ouvré </th> 
+         <th> Statut </th> 
+        </tr>
+      </thead>
+
+      {% for vacation in consultantVacations %}
+        <tbody>
+            <tr class="text-center">
+                <td> {{vacation.startDate|date('Y/m/d')}} <br> {% for subVacation in vacation.subVacations.snapshot %} {{subVacation.startDate|date('Y/m/d')}}  <br> {% endfor %} </td>
+                <td> {{vacation.endDate|date('Y/m/d')}} <br> {% for subVacation in vacation.subVacations.snapshot %}  {{subVacation.endDate|date('Y/m/d')}} <br> {% endfor %} </td> 
+                <td> {{vacation.typeOfVacation}} <br> {% for subVacation in vacation.subVacations.snapshot %} {{subVacation.typeOfVacation}} <br> {% endfor %} </td>
+                <td> {{vacation.grantedAbsenceDays}} <br> {% for subVacation in vacation.subVacations.snapshot %} {{subVacation.svAbsenceDays}} <br> {% endfor %} </td> 
+                <td> {% if vacation.isValidated == true %} 
+                        Validated 
+                    {% else %}
+
+                        Not Validated 
+
+                    {% endif %}
+                </td>
+                
+
+            </tr>
+
+        </tbody>
+
+      {% endfor %}
+
+
+
+    </table>  
+
+    <h1 class="py-3">  Demandes De Formations </h1> 
+    <table class="table">
+        <thead>
+            <tr class="bg-vbl-1">
+                <th> Titre De La Formation </th>
+                <th> Date de Debut </th>
+                <th> Date de Fin </th>
+                <th> Jours d'Absence Ouvré </th>
+                <th> Statut </th>
+
+            </tr>
+
+        </thead> 
+
+        {% for formation in consultantFormations %}
+            <tbody>
+                <tr class="text-center">
+                    <td> {{formation.title}} </td>
+                    <td> {{formation.startDate|date('Y/m/d')}} </td>
+                    <td> {{formation.endDate|date('Y/m/d')}} </td>
+                    <td> {{formation.grantedAbsenceDays}} </td>
+                    <td> {% if formation.isValidated == true %} 
+                            Validated 
+                        {% else %} 
+
+                           Not Validated 
+                        {% endif %}
+                    </td>
+
+                </tr>
+            </tbody>
+
+        {% endfor %}
+
+
+    </table> 
+
+    <h1 class="py-3">  Arrets Maladies </h1> 
+
+    <table class="table">
+        <thead>
+            <tr class="bg-vbl-1">
+                <th> Date de Debut </th>
+                <th> Date de Fin </th>
+                <th> Jours d'Absence Ouvré </th>
+              
+
+            </tr>
+
+        </thead> 
+
+        {% for sickDay in consultantSickDays %}
+            <tbody>
+                <tr class="text-center">
+                    <td> {{sickDay.startDate|date('Y/m/d')}} </td>
+                    <td> {{sickDay.endDate|date('Y/m/d')}} </td>
+                    <td> {{sickDay.grantedAbsenceDays}} </td>
+
+
+                </tr>
+            </tbody>
+
+        {% endfor %}
+    </table>
+
+
+
+{% endblock %}

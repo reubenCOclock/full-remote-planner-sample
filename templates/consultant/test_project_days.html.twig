@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Récapitulatif mensuel{% endblock %}
+
+{% block body %} 
+
+<div class="container-relative">
+
+    <h1 class="py-3"> Déclarer son récapitulatif mensuel</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }} 
+
+    <button type="submit" class="btn btn-dark bg-vbl rounded-pill">Enregistrer</button>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}

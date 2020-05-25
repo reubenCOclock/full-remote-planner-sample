@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+ <h1 class="py-3 text-center"> Voici les congés pour  {{consultant.firstname}} </h1>
+<table class="table"> 
+<thead>
+    <tr class="bg-vbl-1 text-center">  
+        <th> Date de debut</th>
+        <th> Date de fin </th>
+        <th> Journée Ouvré D'absence </th>
+        <th> Modifier </th>
+
+    </tr>
+</thead>
+    {% for vacation in consultantVacations %}
+       <tbody>
+            <tr class="text-center">
+                    <td> {{vacation.startDate|date('Y/m/d')}} <br> {% for subVacation in vacation.subVacations.snapshot %} {{subVacation.startDate|date('Y/m/d')}} <br> {% endfor %} </td>
+                    <td> {{vacation.endDate|date('Y/m/d')}}  <br> {% for subVacation in vacation.subVacations.snapshot %} {{subVacation.endDate|date('Y/m/d')}} <br> {% endfor %}  </td>
+                    <td> {{vacation.grantedAbsenceDays}} <br> {% for subVacation in vacation.subVacations.snapshot %} {{subVacation.svAbsenceDays}} <br> {% endfor %}  </td>
+                    <td> <a href="{{path('modifyConsultantVacation',{'id':vacation.id,'slug':app.user.slug})}}" class="link"> Modifier </td> 
+            </tr>
+       </tbody>
+    {% endfor %}
+
+</table>
+{% endblock %}

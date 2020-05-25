@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+<h1 class="py-3 text-center"> Recaps Par Mois et Anée </h1>
+
+ {{form_start(form)}}
+
+ {{form_widget(form)}}
+ 
+ <button type="submit" class="btn btn-primary bg-warning bg-vbl rounded-pill col-sm-4 offset-sm-4"> Enregistrer </button>
+
+ {{form_end(form)}}
+
+{% endblock %}

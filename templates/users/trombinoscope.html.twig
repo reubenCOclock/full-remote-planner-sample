@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VBL Team{% endblock %}
+
+{% block body %} 
+<div class="container-fluid">
+   <h1 class="text-center">Trombinoscope</h1>
+
+    
+        
+        <div class="row">
+        {% for user in users %}
+
+             {% if user.role.roletitle != "ROLE_CLIENT" %}
+            
+              <div class="col-md-4">  
+              <div class="card zindex">
+                    <img class="card-img-top position-absolute" src="{{asset('img/background/slide.jpg')}}" alt="Card image cap">
+                    <div class="card-body"> 
+                     
+                     <img class="img-fluid img-overlay border-light ml-4 rounded-pill" style="width:75px;height:75px" src="{{asset('images/avatar/' ~ user.imageName)}}" alt="Responsive image">   
+                </div>
+                <div class="card mt-5" style="min-height:250px"> 
+                    <div class="card-body">
+                        <h4 class="card-title">{{user.firstName}}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">{{user.role.roleTitle[5:]|title}}</h6>
+                        <ul class="text-black-50 y-3"> 
+                            <li>Nom : {{user.lastname}}</li>
+                            <li>Tél : {{user.phonenumber}}</li>
+                            <li>Mail : {{user.email}}:</li>
+                            <li>Projets : </li> 
+                                <ul class="indent-left">
+                                    {% for project in user.consultantProjects.snapshot %}
+                                    {% if project.isActive == true %} 
+                                        <li> {{project.title}} </li>
+                                    {% endif %}
+
+                                    {% endfor %}
+                            </ul> 
+                           
+                        
+                        
+                        
+
+                        </div>
+                    </div>
+              </div>
+            </div>
+        
+    
+      {% endif %}
+     {% endfor %}
+    </div>
+</div>
+       
+{% endblock %}
+
+
+
+            

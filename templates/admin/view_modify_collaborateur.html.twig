@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %}  
+
+    <h1 class="py-3 text-center"> Ajouter/Reactiver/Désactiver un Collaborateur</h1>
+    <table class="table table-responsive-sm"> 
+     <thead>
+       <tr class ="bg-vbl-1">
+            <th> Nom </th>
+            <th> Prénom </th>
+            <th> role </th>
+            <th> Modifier Profil </th> 
+            <th> Modifier/Consulter les Congés </th>
+            <th> Modifier/Consulter les Formations </th>
+            <th> Modifier/Consulter les Arrets Maladies </th>
+            <th> status </th>
+            <th> Desactivate Collaborateur </th>
+        </tr>
+
+     </thead>
+    {% for collaborateur in collaborateurs %} 
+     
+        <tbody> 
+           <tr class="text-center">
+                <td> {{collaborateur.lastName}} </td>
+                <td> {{collaborateur.firstName}} </td>
+                <td> {{collaborateur.role.roleTitle}} </td>
+               <td><a class="btn btn-light bg-vbl rounded-pill" href="{{path('modifyCollaborateur',{'id':collaborateur.id,'slug':app.user.slug})}}"> Modifier </a> </td> 
+               {% if collaborateur.role.roleTitle == 'ROLE_CONSULTANT' %}
+               <td> <a class="btn btn-light bg-vbl rounded-pill" href="{{path('modifyConsultantVacations',{'consultantId':collaborateur.id,'slug':app.user.slug})}}" class="link"> Voir/Modifier</a> </td> 
+               {% else %} 
+                <td> N/A </td>
+                {% endif %} 
+
+                {% if collaborateur.role.roleTitle =='ROLE_CONSULTANT' %}
+                <td> <a class="btn btn-light bg-vbl rounded-pill" href="{{path('viewConsultantFormations',{'consultantId':collaborateur.id,'slug':app.user.slug})}}" class="link"> Voir/Modifier</a> </td> 
+                {% else %} 
+                <td> N/A </td>
+                {% endif %} 
+
+                {% if collaborateur.role.roleTitle == 'ROLE_CONSULTANT' %} 
+                <td> <a class="btn btn-light bg-vbl rounded-pill" href="{{path('viewAMByConsultant',{'consultantId':collaborateur.id,'slug':app.user.slug})}}" class="link"> Voir/Modifier </a> </td> 
+                {% else %} 
+                <td> N/A </td> 
+               {% endif %}
+               
+               <td> {% if collaborateur.isEmployed == true %} 
+                        active 
+                    {% else %} 
+                       inactive 
+                    {% endif %} 
+                </td>
+               <td> 
+                {% if collaborateur.isEmployed == true %}
+               <a class="btn btn-danger bg-vbl rounded-pill" href="{{path('removeCollaborateur',{'id':collaborateur.id,'slug':app.user.slug})}}">Desactiver </a> 
+               {% else %} 
+               <a class="btn btn-secondary bg-vbl rounded-pill" href="{{path('reactivateCollaborateur',{'id':collaborateur.id,'slug':app.user.slug})}}">Reactivate </a>
+               {% endif %} 
+               </td>
+            </tr>
+        </tbody> 
+        
+    {% endfor %} 
+
+    </table> 
+    <h4><a class="btn btn-primary bg-vbl rounded-pill bg-warning col-sm-4 offset-sm-5" href="{{path('addCollaborateur',{'slug':app.user.slug})}}"> Ajouter un collaborateur </a> </h4> 
+
+
+{% endblock %}

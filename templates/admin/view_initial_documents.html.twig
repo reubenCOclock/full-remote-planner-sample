@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %}
+    
+    <h1 class="py-3"> Documents Initials Pour {{consultant.firstname}} </h1>
+   <table class="table table-responsive-sm">
+    <thead>
+        <tr class="bg-vbl-1 text-center"> 
+         
+            <th> Type de document </th>
+            <th> Consulter </th>
+        </tr>
+    </thead>
+
+   
+    {% for document in consultantDocuments %} 
+       <tbody>
+          <tr class="text-center">
+           
+             <td> {{document.title}} </td> 
+             <td> <a href="{{path('downloadFacture',{'id':document.id,'slug':app.user.slug})}}" class="link"> Consulter </td> 
+          </tr>
+       </tbody>
+
+    {% endfor %} 
+
+
+  </table>
+
+{% endblock %}

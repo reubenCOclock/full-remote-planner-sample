@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+    {{dump(document)}}
+    <a href="{{asset('uploads/pdfs/'~document.url)}}"> See Document </a>
+{% endblock %}

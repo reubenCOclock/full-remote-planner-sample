@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+ 
+<h1 class="py-3 text-center"> Ajouter/Clôturer un projet</h1>
+    <table class="table table-responisve-sm">
+        <thead>
+           <tr class ="bg-vbl-1">
+                <th> Titre </th>
+                <th> Description </th>
+                <th> Client </th>
+                <th> Manager </th>
+                <th> Consultants </th> 
+                <th> Type De Contrat </th>
+                <th> Clôturé </th>
+               
+            </tr>
+        </thead> 
+
+        
+
+       
+        
+        {% for project in projects %} 
+         {% if project.isActive != false %} 
+           
+           
+            <tbody> 
+                <tr class="text-center">
+                    <td> {{project.title}} </td>
+                    <td> {{project.description}} </td>
+                    {% if project.client == null %}
+                      <td> null </td>
+                    {% else %}
+                       <td> {{project.client.firstname}} </td>
+                    {% endif %}
+                    {% if project.manager == null %} 
+                       <td> null </td>
+                    {% else %}
+                       <td> {{project.manager.firstname}} </td>  
+                    {% endif %}
+                <td>
+                {% for user in project.consultants.snapshot %} 
+                  
+                   <ul>
+                    {% if user.role.roleTitle == 'ROLE_CONSULTANT' %}
+                        <li> {{user.firstname}} </li>
+                    {% endif %}  
+                     </ul>
+                  
+                {% endfor %}  
+                </td>
+
+                <td> {{project.contractType}} 
+                  <br> 
+                   {% if project.contractType == 'Forfait' %} 
+                        <a href="{{path('seeForfaitDetails',{'id':project.id,'slug':app.user.slug})}}" class="link"> Details des Livrables </a> 
+                   {% endif %} 
+
+                   {% if project.contractType == 'Regis' %}
+                        <a href="{{path('seeRegisDetails',{'id':project.id,'slug':app.user.slug})}}" class="link"> Details Des Prix Par Consultant </a>
+                   {% endif %}
+                </td>
+                <td> <a class="btn btn-danger bg-vbl rounded-pill" href="{{path('markProjectAsFinished',{'id':project.id,'slug':app.user.slug})}}" class="link"> Cloturer </a> </td>
+                
+                </tr>
+
+            </tbody> 
+
+          {% endif %}
+
+        {% endfor %}
+        
+    </table>
+<h4><a class="btn btn-primary bg-vbl bg-warning  rounded-pill col-sm-4 offset-sm-4" href="{{path('addProject',{'slug':app.user.slug})}}"> Ajouter un nouveau projet</a></h4>
+    
+{% endblock %} 
+

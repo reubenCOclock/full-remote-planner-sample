@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %} 
+   <h1 class="py-3"> Vieullez Choisir Le Consultnat Pour Lequel Vous Souhaiterai Consulter Le Documents D'arret maladie </h1>
+    {{form_start(form)}}
+
+    {{form_widget(form)}} 
+     
+     <button type="submit" class="btn btn-primary bg-vbl rounded-pill"> Choisir Consultant </button>
+
+    {{form_end(form)}}
+{% endblock %}

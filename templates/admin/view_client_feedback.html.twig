@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %} 
+{% block body %} 
+       <h1 class="py-3 text-center"> Feedback des clients pour {{consultant.firstname}}</h1> 
+       <table class="table table-responsive-sm">
+        <thead>
+        <tr class ="bg-vbl-1 text-center">
+            <th> Titre </th>
+            <th> description </th>
+            <th> project </th>
+            <th> client </th>
+            <th> Company </th>
+            
+
+        </thead> 
+
+        {% for feedback in consultantFeedbacks %}
+            <tbody>
+                <tr class="text-center">
+                    <td> {{feedback.title}} </td>
+                    <td> {{feedback.description}} </td>
+                    {% if feedback.project == null %}
+                    <td> null </td> 
+                    <th> null </td>
+                    {% else %} 
+                    <td> {{feedback.project.title}} </td>
+                    <td> {{feedback.project.client.firstname}} </td>
+                    <td> {{feedback.project.client.companyName}} </td>
+                    {% endif %}
+
+                   
+                </tr>
+            </tbody>
+
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

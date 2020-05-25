@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %} 
+    
+ <h1 class="py-3"> Arrets Maladies Pour {{consultant.firstname}} </h1>
+ <table class="table table-responsive-sm"> 
+ <thead>
+    <tr class="bg-vbl-1 text-center"> 
+        <th> Date de debut </th>
+        <th> Date de fin </th>
+        <th> Journée d'absence ouvré </th>
+        <th> Attestation </th>
+        <th> Modifier </th> 
+    </tr>
+ </thead>
+    {% for sickDay in userArretsMaladies %} 
+        <tr class="text-center"> 
+            <td> {{sickDay.startDate|date('Y/m/d')}} </td>
+            <td> {{sickDay.endDate|date('Y/m/d')}} </td>
+            <td> {{sickDay.grantedAbsenceDays}} </td>
+            {% if sickDay.document!= null %}
+            <td> <a href="{{path('downloadAMAttestation',{'id':sickDay.document.id,'slug':app.user.slug})}}" class="link"> Voir l'attestation </a> </td>  
+            {% else %} 
+            <td> N/A </td>
+            {% endif %}
+            <td> <a href="{{path('modifyConsultantAM',{'id':sickDay.id,'slug':app.user.slug})}}" class="link"> Modifier </a> </td>
+
+        </tr>
+    {% endfor %}
+{% endblock %}

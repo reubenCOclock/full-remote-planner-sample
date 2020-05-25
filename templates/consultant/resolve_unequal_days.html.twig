@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %} 
+
+{% block body %}
+
+
+
+  
+ 
+  <p class="alert alert-warning text-center rounded-pill font-weight-bold"> Voici votre saisie precedante, cette fois si viellez bien verifier de saisir la valeur qui correspond aux jours que vous avez travaillé pendent ce mois: {{expectedWorkingDays}} </p>
+
+
+  {{ form_start(form) }}   
+    {{form_row(form.month,{'label_attr':{'value':app.session.get('actualMonth')}})}} 
+ 
+     
+   <div class="project-days" data-prototype="{{ form_widget(form.projectDays.vars.prototype)|e('html_attr') }}"> 
+       {{form_row(form.projectDays)}}
+    </div>
+  
+    <div class="form-group row button-types  d-none d-md-block">
+        <div class="offset-sm-1"> <button type="button"  class="add-project btn btn-dark bg-vbl rounded-pill btn-margin col-sm-3 offset-sm-4">  Ajouter Un Projet </button> </div> 
+        
+     </div> 
+
+     <div class="form-group row button-types offset-sm-4 d-block d-md-none">
+        <button type="button" id="add-project" class="add-project col btn btn-dark bg-vbl rounded-pill btn-margin col-sm-12">  Ajouter Un Projet </button>  
+     </div>
+
+     <div class="form-group row button-types d-none d-md-block">
+
+        <div class="offset-sm-2"> <button style="display:none" type="button"  class="remove-project btn btn-dark bg-vbl rounded-pill  btn-margin col-sm-4 offset-sm-3 pos-rel-recap-supprimer"> Supprimer le dernier Projet </button>  </div>
+
+     </div> 
+
+     <div class="form-group row button-types d-block d-md-none"> 
+         <button type="button" style="display:none"  class="remove-project col btn btn-dark bg-vbl rounded-pill btn-margin col-sm-12">  Supprimer le Dernier Projet </button>  
+
+     </div>
+
+    <div class="d-none d-md-block"> <button type="submit" class="btn btn-primary bg-warning bg-vbl rounded-pill text-white offset-sm-4 col-sm-3 pos-rel-recap-submit">Enregistrer</button> </div> 
+     <div class=" d-block d-md-none"> <button type="submit" class="col btn btn-primary bg-warning bg-vbl rounded-pill text-white">Enregistrer</button> </div>
+
+
+
+    {{ form_end(form) }} 
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+
+
+
+    <script>
+        $(function(){
+            var $addProjectBTN=$('#add-project');
+            var $removeProjectBTN=$('#remove-project');
+            var $collectionHolder=$('div.project-days');
+            var counter=0;
+            $addProjectBTN.click(function(){
+                addProjectDaysForm($collectionHolder)
+            })
+
+            $removeProjectBTN.click(removeProjectDays);
+
+         
+
+            function addProjectDaysForm($valueHolder){ 
+                counter ++;
+                var $projectDaysForm=$valueHolder.data('prototype');
+                var $newForm=($projectDaysForm.replace(/__name__/g,counter));
+                $valueHolder.append($newForm);
+                $newFormObject=$($newForm);
+                $newFormObject.data('counter',counter);
+                console.log($newFormObject.data('counter'));
+                //console.log(Object.values($('div.project-days').children()));
+            } 
+            
+
+            function removeProjectDays(){
+                var $projectsForms=Object.values($('div.project-days').children());
+                //console.log($projectsForms[1]);
+                if($projectsForms.length-3!=0){
+                console.log($projectsForms.length-3);
+                $projectsForms[$projectsForms.length-3].remove();
+                }
+                
+            }
+            
+
+            
+
+
+ 
+          
+        })
+
+
+    </script>
+        
+{% endblock %}

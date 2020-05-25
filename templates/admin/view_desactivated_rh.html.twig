@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table table-responsive-sm">
+        <thead>
+        <tr class ="bg-vbl-1">
+            <th> Nom </th>
+            <th> Prénom </th>
+            <th> Type de cContrat </th>
+            <th> Email </th>
+            <th> Portable </th>
+            <th> Congés validés </th>
+            <th> Formations validées </th>
+            <th> Modifier collaborateur </th>
+            <th> Desactiver Collaborateur </th>
+
+        </thead> 
+
+        {% for rh in desactivatedRH %} 
+     
+        <tbody> 
+           <tr class="text-center">
+                <td> {{rh.lastName}} </td>
+                <td> {{rh.firstName}} </td>
+                <td> {{rh.contractualStatus}} </td>
+                <td> {{rh.email}} </td>
+                <td> {{rh.phoneNumber}} </td> 
+                <td>
+                {% for vacation in rh.validatedVacations.snapshot %}
+                 
+                 <ul> <li> <a class="link" href="{{path('viewValidatedVacations',{'vacationId':vacation.id,'slug':app.user.slug})}}"> {{vacation.typeOfVacation}} </a> </li></ul> 
+
+               {% endfor %} 
+               </td>
+               <td>
+               {% for formation in rh.validatedFormations.snapshot %} 
+                
+                  <ul> <li><a class="link" href="{{path('viewValidatedFormations',{'collaborateurId':collaborateur.id,'formationId':formation.id,'slug':app.user.slug})}}"> {{formation.title}} </a> </li> </ul>  
+               {% endfor %}
+               </td>  
+               <td> <a class="link" href="{{path('reactivateCollaborateur',{'id':rh.id,'slug':app.user.slug})}}">Reactivate </a> </td>
+            </tr>
+        </tbody> 
+       
+    {% endfor %} 
+
+    </table>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %} 
+  
+    <h1 class="py-3 text-center">  Recaps de {{monthName}} 20{{year}} </h1> 
+       <table class="table table-responsive-sm">
+        <thead>
+        <tr class ="bg-vbl text-center">
+            <th> Consultant </th>
+            <th> Date De Declaration </th>
+            <th> Projets Declarés</th>
+            <th> Jours Ouvré Dans Le Mois </th>
+            <th> Jours De Declaration </th>
+            <th> Jours Decalrés d'Absence Lors de la Soumission </th>
+            
+
+        </thead> 
+
+        {% for recap in recaps %}
+            <tbody> 
+                <tr class="text-center"> 
+                    <td> {{recap.consultant.firstname}} </td>
+                    <td> {{recap.createdAt|date('Y/m/d')}} </td>
+                   
+                    <td> {% for projectDay in recap.projectDays.snapshot %}
+                                {{projectDay.project.title}}
+                                <br>
+                        {% endfor %}
+                    </td> 
+                    <td> {{monthWorkingDays}} </td>
+                    <td>
+                         {% for projectDay in recap.projectDays.snapshot %}
+                                {{projectDay.days}}
+                                <br>
+                        {% endfor %}
+                    </td>
+
+                    <td> {{recap.consultantAbsenceDays}} </td>
+
+                    
+                   
+
+                   
+                </tr>
+            </tbody>
+
+        {% endfor %}
+
+    </table> 
+
+    <br>
+
+    <h1 class="py-3 text-center">  Consultants qui N'ont Pas/Pas Encore Soumis Leur Recap Pour Ce Mois </h1> 
+
+    <table class="table"> 
+      <thead>
+       <tr class="bg-vbl-1 text-center">
+        <th> Prenom </th>
+        <th> Email </th>
+        <th> Projets En Cours </th> 
+        </tr>
+      </thead>
+
+      {% for consultant in emptyConsultants %}
+        <tbody>
+            <tr class="text-center">
+                <td> {{consultant.firstname}} </td>
+                <td> {{consultant.email}} </td> 
+                <td> {% for project in consultant.consultantProjects.snapshot %}  
+                  {% if project.isActive == true %}
+                       <div> {{project.title}} </div>
+                       <br> 
+                  {% endif %}
+                    {% endfor %}
+                </td>
+
+            </tr>
+
+        </tbody>
+
+      {% endfor %}
+
+
+
+    </table>
+
+{% endblock %}
